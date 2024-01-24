@@ -18,4 +18,12 @@ Hosts the backend components for conference management system
 
 1. I want to assign available rooms to speakers for their sessions,so that the each speaker has an allocated space.
 
-2. I want to ensure that each session is limited to an hour,so that the schedule stays on time and attendees can plan their day effectively.
+2. I want to define the conference schedule for each day, so that attendees know when and where each session is happening.
+
+3. I want to control the duration of each session, so that the schedule is organized.
+
+4. I want to add speakers to the conference, so that they can conduct sessions.
+
+5. I want to approve or reject attendee requests for specific sessions, so that I can manage session attendance.
+
+6. I want to make changes to the schedule or room assignments, so that I can adapt to unforeseen circumstances.
