@@ -27,3 +27,20 @@ Hosts the backend components for conference management system
 5. I want to approve or reject attendee requests for specific sessions, so that I can manage session attendance.
 
 6. I want to make changes to the schedule or room assignments, so that I can adapt to unforeseen circumstances.
+
+## Entities
+
+1. Speaker
+   - Attributes: Speaker ID, Name, Contact Information
+2. Session
+   - Attributes: Session ID, Speaker, Topic, Time, Room
+3. Room
+   - Attributes: Room Number, Capacity, Availability
+4. Attendee
+   - Attributes: Attendee ID, Name, Contact Information
+5. Organizer
+   - Attributes: Organizer ID, Name, Contact Information
+
+### Entity Relation Diagram
+
+![ERD_Conference_Management](https://github.com/Sobikanth/api-conf-manage/assets/77259477/88238175-4653-49e0-bfae-48ade3da07d6)
