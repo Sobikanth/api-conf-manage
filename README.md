@@ -30,17 +30,23 @@ Hosts the backend components for conference management system
 
 ## Entities
 
-1. Speaker
-   - Attributes: Speaker ID, Name, Contact Information
-2. Session
-   - Attributes: Session ID, Speaker, Topic, Time, Room
-3. Room
+1. Slot
+   - Attributes: ID, Start time, End time
+2. Room
    - Attributes: Room Number, Capacity, Availability
+3. Speaker
+   - Attributes: ID, First name, Last name
 4. Attendee
-   - Attributes: Attendee ID, Name, Contact Information
-5. Organizer
-   - Attributes: Organizer ID, Name, Contact Information
+   - Attributes: ID ,First name, Last name, Contact number
+5. Day
+   - Attributes: Conf_date, Day of the week
+6. Topic
+   - Attributes: ID, Title, Genre
+7. Session
+   - Attributes: ID, Speaker, Slot, Room, Conf_date
+8. Session_Attendee
+   - Attributes: ID, Attendee, Session
 
 ### Entity Relation Diagram
 
-![ERD_Conference_Management](https://github.com/Sobikanth/api-conf-manage/assets/77259477/88238175-4653-49e0-bfae-48ade3da07d6)
+![ERD_Conference_Management](https://github.com/Sobikanth/api-conf-manage/assets/77259477/766e9e09-67d6-424d-a05d-398f92d3175a)
