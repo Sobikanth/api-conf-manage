@@ -57,14 +57,20 @@ Hosts the backend components for conference management system
 
    - Logs in and view the scheduled session.
 
+     _Touchpoints - Conference dashboard_
+
 2. Prepares
 
    - Access speaker resources.
    - Uploads presentation materials.
 
+     _Touchpoints - Speaker's dashboard_
+
 3. Delivers session
 
    - Delivers session either physically or virtually.
+
+     _Touchpoints - On-site or virtual session platform_
 
 ### Room coordinator's Journey
 
@@ -72,21 +78,31 @@ Hosts the backend components for conference management system
 
    - Logs in and view the scheduled session.
 
+     _Touchpoints - Conference dashboard_
+
 2. Room set up
 
    - Sets up room for sessions according to the availability.
 
+     _Touchpoints - Room coordinator dashboard_
+
 3. Post session clean up
 
    - Closes the session make the room available for coming session.
+
+     _Touchpoints - Room coordinator dashboard_
 
 ### Organizer's / Administrator's Journey
 
 1. Configure the system
 
    - Manages the user roles.
-     -Configures system settings.
+   - Configures system settings.
+
+     _Touchpoints - Admin dashboard_
 
 2. Manage user
 
    - Manages speakers, attendees and other users.
+
+     _Touchpoints - Admin dashboard dashboard_
