@@ -45,6 +45,48 @@ Hosts the backend components for conference management system
 
 ![ERD_Conference_Management](https://github.com/Sobikanth/api-conf-manage/assets/77259477/9fbede9a-fb50-403d-a635-335759f995f5)
 
-### User Journey Map
+## User Journey Map
+
+### Attendee's Journey
 
 ![Customer journey map](https://github.com/Sobikanth/api-conf-manage/assets/77259477/a6694d41-26e2-43e8-a912-fd8a7def971d)
+
+### Speaker's Journey
+
+1. View schedule
+
+   - Logs in and view the scheduled session.
+
+2. Prepares
+
+   - Access speaker resources.
+   - Uploads presentation materials.
+
+3. Delivers session
+
+   - Delivers session either physically or virtually.
+
+### Room coordinator's Journey
+
+1. View schedule
+
+   - Logs in and view the scheduled session.
+
+2. Room set up
+
+   - Sets up room for sessions according to the availability.
+
+3. Post session clean up
+
+   - Closes the session make the room available for coming session.
+
+### Organizer's / Administrator's Journey
+
+1. Configure the system
+
+   - Manages the user roles.
+     -Configures system settings.
+
+2. Manage user
+
+   - Manages speakers, attendees and other users.
