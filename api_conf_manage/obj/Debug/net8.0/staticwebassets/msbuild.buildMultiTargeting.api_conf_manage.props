@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/api_conf_manage.props" />
+</Project>
