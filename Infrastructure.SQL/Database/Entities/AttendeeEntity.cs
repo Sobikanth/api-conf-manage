@@ -17,6 +17,6 @@ public class AttendeeEntity
     [Required]
     public string Gender { get; set; }
     //Navigation properties
-    public Session_Attendee Session_Attendee { get; set; }
+    public Session_AttendeeEntity Session_AttendeeEntity { get; set; }
 
 }

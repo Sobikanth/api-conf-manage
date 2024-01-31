@@ -1,0 +1,15 @@
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/bin/Debug/net8.0/Infrastructure.SQL.deps.json
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/bin/Debug/net8.0/Infrastructure.SQL.dll
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/bin/Debug/net8.0/Infrastructure.SQL.pdb
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/obj/Debug/net8.0/Infrastructure.SQL.csproj.AssemblyReference.cache
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/obj/Debug/net8.0/Infrastructure.SQL.GeneratedMSBuildEditorConfig.editorconfig
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/obj/Debug/net8.0/Infrastructure.SQL.AssemblyInfoInputs.cache
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/obj/Debug/net8.0/Infrastructure.SQL.AssemblyInfo.cs
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/obj/Debug/net8.0/Infrastructure.SQL.csproj.CoreCompileInputs.cache
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/obj/Debug/net8.0/Infrastructure.SQL.sourcelink.json
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/obj/Debug/net8.0/Infrastructure.SQL.dll
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/obj/Debug/net8.0/refint/Infrastructure.SQL.dll
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/obj/Debug/net8.0/Infrastructure.SQL.pdb
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/obj/Debug/net8.0/ref/Infrastructure.SQL.dll
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/bin/Debug/net8.0/Infrastructure.SQL.runtimeconfig.json
+/Users/m.sobikanth/Documents/Sobi/DotNet/ASP.NET/Jan_24_Conference_Management_System/api-conf-manage/Infrastructure.SQL/obj/Debug/net8.0/Infrastructure.SQL.genruntimeconfig.cache

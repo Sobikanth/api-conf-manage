@@ -8,11 +8,9 @@ public class SessionEntity
     public DateTime ConfDate { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
-    public SpeakerEntity Speaker { get; set; }
-    public RoomEntity Room { get; set; }
 
     //Navigation properties
-    public Session_Attendee Session_Attendee { get; set; }
+    public Session_AttendeeEntity Session_AttendeeEntity { get; set; }
     public RoomEntity RoomEntity { get; set; }
     public SpeakerEntity SpeakerEntity { get; set; }
 }
