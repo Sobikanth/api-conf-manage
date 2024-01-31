@@ -1,22 +1,16 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Infrastructure.SQL.Database.Entities;
 
-public class AttendeeEntity
+public class SpeakerEntity
 {
-    [Key]
     public int Id { get; set; }
-    [Required]
     public string FirstName { get; set; }
-    [Required]
     public string LastName { get; set; }
-    [Required]
     public string ContactNumber { get; set; }
-    [Required]
     public string Email { get; set; }
-    [Required]
     public string Gender { get; set; }
-    //Navigation properties
-    public Session_Attendee Session_Attendee { get; set; }
+    public string University { get; set; }
+    public string JobTitle { get; set; }
 
+    //Navigation properties
+    public ICollection<SessionEntity> Sessions { get; set; }
 }

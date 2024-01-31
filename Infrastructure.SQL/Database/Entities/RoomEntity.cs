@@ -1,10 +1,11 @@
 namespace Infrastructure.SQL.Database.Entities;
 
-public class Session_Attendee
+public class RoomEntity
 {
-    public int Id;
-
+    public int Id { get; set; }
+    public int Capacity { get; set; }
+    public string Available { get; set; }
+    
     //Navigation properties
-    public ICollection<AttendeeEntity> Attendees { get; set; }
     public ICollection<SessionEntity> Sessions { get; set; }
 }
