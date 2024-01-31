@@ -10,7 +10,8 @@ public class SessionEntity
     public DateTime EndTime { get; set; }
 
     //Navigation properties
-    public Session_AttendeeEntity Session_AttendeeEntity { get; set; }
+    // public Session_AttendeeEntity Session_AttendeeEntity { get; set; }
+    public ICollection<Session_AttendeeEntity> Session_AttendeeEntities { get; set; }
     public RoomEntity RoomEntity { get; set; }
     public SpeakerEntity SpeakerEntity { get; set; }
 }
