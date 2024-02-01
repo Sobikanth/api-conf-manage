@@ -28,7 +28,7 @@ public class AuthenticationController : ControllerBase
     }
     [HttpPost]
     [Route("Register")]
-    public async Task<IActionResult> Register([FromBody] UserRegisterModel userRegisterModel,string role)
+    public async Task<IActionResult> Register([FromBody] UserRegisterModel userRegisterModel,string? role)
     {
         var result = await _userRegisterService.RegisterAsync(_userRegisterModelMapper.Map(userRegisterModel),role);
         if (result == "User created successfully!")

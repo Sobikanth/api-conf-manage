@@ -26,4 +26,18 @@ public class UserRepository : IUserRepository
         await _confContext.SaveChangesAsync();
         return AttendeeEntity.Id;
     }
+    public async Task<int> CreateOrganizerAsync(UserRegisterModelDto userRegisterModelDto)
+    {
+        var OrganizerEntity = new OrganizerEntity
+        {
+            FirstName = userRegisterModelDto.FirstName,
+            LastName = userRegisterModelDto.LastName,
+            ContactNumber = userRegisterModelDto.ContactNumber,
+            Email = userRegisterModelDto.Email,
+            Gender = userRegisterModelDto.Gender
+        };
+        await _confContext.Organizers.AddAsync(OrganizerEntity);
+        await _confContext.SaveChangesAsync();
+        return OrganizerEntity.Id;
+    }
 }

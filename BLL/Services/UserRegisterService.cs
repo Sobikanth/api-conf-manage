@@ -19,7 +19,7 @@ public class UserRegisterService : IUserRegisterService
         _configuration = configuration;
         _userRepository = userRepository;
     }
-    public async Task<string> RegisterAsync(UserRegisterModelDto userRegisterModelDto,string role)
+    public async Task<string> RegisterAsync(UserRegisterModelDto userRegisterModelDto,string? role)
     {
         var userExists = await _userManager.FindByNameAsync(userRegisterModelDto.Email);
         if (userExists != null)
@@ -30,19 +30,18 @@ public class UserRegisterService : IUserRegisterService
             SecurityStamp = Guid.NewGuid().ToString(),
             UserName = userRegisterModelDto.Email
         };
-        if (await _roleManager.RoleExistsAsync(role))
+        if (role == null)
+        {
+            await _userManager.CreateAsync(user, userRegisterModelDto.Password);
+            await _userRepository.CreateAttendeeAsync(userRegisterModelDto);
+            return "User created successfully!";
+        }
+        if (await _roleManager.RoleExistsAsync(role) )
         {
             var result = await _userManager.CreateAsync(user, userRegisterModelDto.Password);
             if (result.Succeeded)
             {
-                if (role == "User")
-                {
-                    await _userRepository.CreateAttendeeAsync(userRegisterModelDto);
-                }
-                else if (role == "Admin")
-                {
-                    return "You are not authorized to create an Admin!";
-                }
+                    await _userRepository.CreateOrganizerAsync(userRegisterModelDto);
             }
             else
             {
