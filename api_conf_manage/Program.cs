@@ -28,10 +28,12 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 
 //Services Registration
 
-builder.Services.AddScoped<IUserRegisterService,UserRegisterService>();
-builder.Services.AddScoped<IUserRepository,UserRepository>();
-builder.Services.AddScoped<IUserRegisterModelMapper,UserRegisterModelMapper>();
-builder.Services.AddScoped<IAttendeeMapper,AttendeeMapper>();
+builder.Services.AddScoped<IUserRegisterService, UserRegisterService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRegisterModelMapper, UserRegisterModelMapper>();
+builder.Services.AddScoped<IAttendeeMapper, AttendeeMapper>();
+builder.Services.AddScoped<ILogInModelMapper, LogInModelMapper>();
+builder.Services.AddScoped<IUserLogInService, UserLogInService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
