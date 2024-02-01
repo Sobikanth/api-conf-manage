@@ -3,6 +3,7 @@ using api_conf_manage.models;
 using Domain.Services;
 using Infrastructure.SQL.Database;
 using Infrastructure.SQL.Database.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,9 +33,9 @@ public class AuthenticationController : ControllerBase
     }
     [HttpPost]
     [Route("Register")]
-    public async Task<IActionResult> Register([FromBody] UserRegisterModel userRegisterModel,string? role)
+    public async Task<IActionResult> Register([FromBody] UserRegisterModel userRegisterModel, string? role)
     {
-        var result = await _userRegisterService.RegisterAsync(_userRegisterModelMapper.Map(userRegisterModel),role);
+        var result = await _userRegisterService.RegisterAsync(_userRegisterModelMapper.Map(userRegisterModel), role);
         if (result == "User created successfully!")
         {
             return Ok(new Response { Status = "Success", Message = result });
@@ -43,42 +44,6 @@ public class AuthenticationController : ControllerBase
         {
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = result });
         }
-        /* var userExists = await _userManager.FindByNameAsync(model.Email);
-        if (userExists != null)
-            return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
-        IdentityUser user = new()
-        {
-            Email = model.Email,
-            SecurityStamp = Guid.NewGuid().ToString(),
-            UserName = model.Email
-        };
-        if (await _roleManager.RoleExistsAsync(role))
-        {
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
-            {
-                var AttendeeEntity = new AttendeeEntity
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    ContactNumber = model.ContactNumber,
-                    Email = model.Email,
-                    Gender = model.Gender
-                };
-                await _confContext.Attendees.AddAsync(AttendeeEntity);
-                await _confContext.SaveChangesAsync();
-            }
-            else
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
-            }
-            await _userManager.AddToRoleAsync(user, role);
-            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
-        }
-        else
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Role does not exist!" });
-        } */
     }
     [HttpPost]
     [Route("Login")]
