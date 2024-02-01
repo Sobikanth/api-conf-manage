@@ -1,15 +1,39 @@
+using api_conf_manage.Mapping;
+using api_conf_manage.Mapping.Interfaces;
+using Azure.Identity;
+using BLL.Services;
+using Domain.Repositories;
+using Domain.Services;
 using Infrastructure.SQL.Database;
+using Infrastructure.SQL.Repositories;
+
+// using Infrastructure.SQL.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var keyVaultUri = builder.Configuration.GetValue<string>("KeyVault:Uri");
+builder.Configuration.AddAzureKeyVault(new Uri(keyVaultUri), new DefaultAzureCredential());
 
-var dbConnection = "Server=localhost;Database=conf_manage;User Id=sa;Password=Docker@123;TrustServerCertificate=True;";
+
+var dbConnection = builder.Configuration.GetValue<string>("api-conf-manage");
 builder.Services.AddDbContext<ConfContext>(options => options.UseSqlServer(dbConnection, b => b.MigrationsAssembly("api_conf_manage")));
 
+var dbConnection_auth = builder.Configuration.GetValue<string>("api-conf-manage-auth");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(dbConnection_auth, b => b.MigrationsAssembly("api_conf_manage")));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+//Services Registration
+
+builder.Services.AddScoped<IUserRegisterService,UserRegisterService>();
+builder.Services.AddScoped<IUserRepository,UserRepository>();
+builder.Services.AddScoped<IUserRegisterModelMapper,UserRegisterModelMapper>();
+builder.Services.AddScoped<IAttendeeMapper,AttendeeMapper>();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -31,6 +55,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
