@@ -5,9 +5,9 @@ public class SessionEntity
     //Attributes: ID, Speaker ID, Room ID, Topic, Conf date, Start time, End time
     public int Id { get; set; }
     public string Topic { get; set; }
-    public DateTime ConfDate { get; set; }
-    public DateTime StartTime { get; set; }
-    public DateTime EndTime { get; set; }
+    public DateOnly ConfDate { get; set; }
+    public TimeOnly StartTime { get; set; }
+    public TimeOnly EndTime { get; set; }
 
     //Navigation properties
     // public Session_AttendeeEntity Session_AttendeeEntity { get; set; }

@@ -4,6 +4,6 @@ namespace Domain.Repositories;
 
 public interface IUserRepository
 {
-    Task<int> CreateAttendeeAsync(UserRegisterModelDto userRegisterModelDto);
-    Task<int> CreateOrganizerAsync(UserRegisterModelDto userRegisterModelDto);
+    Task<string> CreateAttendeeAsync(UserRegisterModelDto userRegisterModelDto);
+    Task<string> CreateOrganizerAsync(UserRegisterModelDto userRegisterModelDto, string role);
 }

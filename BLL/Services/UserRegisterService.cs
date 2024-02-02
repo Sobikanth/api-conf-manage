@@ -21,7 +21,7 @@ public class UserRegisterService : IUserRegisterService
     }
     public async Task<string> RegisterAsync(UserRegisterModelDto userRegisterModelDto,string? role)
     {
-        var userExists = await _userManager.FindByNameAsync(userRegisterModelDto.Email);
+        /* var userExists = await _userManager.FindByNameAsync(userRegisterModelDto.Email);
         if (userExists != null)
             return "User already exists!";
         IdentityUser user = new()
@@ -53,6 +53,20 @@ public class UserRegisterService : IUserRegisterService
         else
         {
             return "Role does not exist!";
+        } */
+    
+        if (role == null)
+        {
+        return await _userRepository.CreateAttendeeAsync(userRegisterModelDto);
         }
+        else if (await _roleManager.RoleExistsAsync(role) )
+        {
+            return await _userRepository.CreateOrganizerAsync(userRegisterModelDto, role);
+        }
+        else
+        {
+            return "Role does not exist!";
+        }
+    
     }
 }

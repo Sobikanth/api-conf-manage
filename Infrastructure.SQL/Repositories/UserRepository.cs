@@ -2,42 +2,121 @@ using Domain.DTOs;
 using Domain.Repositories;
 using Infrastructure.SQL.Database;
 using Infrastructure.SQL.Database.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.SQL.Repositories;
 
 public class UserRepository : IUserRepository
 {
     private readonly ConfContext _confContext;
-    public UserRepository(ConfContext confContext)
+    private readonly ApplicationDbContext _applicationDbContext;
+    private readonly UserManager<IdentityUser> _userManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
+    public UserRepository(ConfContext confContext, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext applicationDbContext)
     {
         _confContext = confContext;
+        _userManager = userManager;
+        _roleManager = roleManager;
+        _applicationDbContext = applicationDbContext;
     }
-    public async Task<int> CreateAttendeeAsync(UserRegisterModelDto userRegisterModelDto)
+    public async Task<string> CreateAttendeeAsync(UserRegisterModelDto userRegisterModelDto)
     {
-        var AttendeeEntity = new AttendeeEntity
+        using (var confdb_transaction = await _confContext.Database.BeginTransactionAsync())
+        using (var applicationdb_transaction = await _applicationDbContext.Database.BeginTransactionAsync())
+
         {
-            FirstName = userRegisterModelDto.FirstName,
-            LastName = userRegisterModelDto.LastName,
-            ContactNumber = userRegisterModelDto.ContactNumber,
-            Email = userRegisterModelDto.Email,
-            Gender = userRegisterModelDto.Gender
-        };
-        await _confContext.Attendees.AddAsync(AttendeeEntity);
-        await _confContext.SaveChangesAsync();
-        return AttendeeEntity.Id;
+            try
+            {
+                var userExists = await _userManager.FindByNameAsync(userRegisterModelDto.Email);
+                if (userExists != null)
+                    return "User already exists!";
+                IdentityUser user = new()
+                {
+                    Email = userRegisterModelDto.Email,
+                    SecurityStamp = Guid.NewGuid().ToString(),
+                    UserName = userRegisterModelDto.Email
+                };
+                await _userManager.CreateAsync(user, userRegisterModelDto.Password);
+                var AttendeeEntity = new AttendeeEntity
+                {
+                    FirstName = userRegisterModelDto.FirstName,
+                    LastName = userRegisterModelDto.LastName,
+                    ContactNumber = userRegisterModelDto.ContactNumber,
+                    Email = userRegisterModelDto.Email,
+                    Gender = userRegisterModelDto.Gender
+                };
+                await _confContext.Attendees.AddAsync(AttendeeEntity);
+                await _confContext.SaveChangesAsync();
+                confdb_transaction.Commit();
+                applicationdb_transaction.Commit();
+                // return AttendeeEntity.Id;
+                return "User created successfully!";
+            }
+            catch (Exception ex)
+            {
+                await confdb_transaction.RollbackAsync();
+                await applicationdb_transaction.RollbackAsync();
+                return ex.Message;
+            }
+        }
     }
-    public async Task<int> CreateOrganizerAsync(UserRegisterModelDto userRegisterModelDto)
+    public async Task<string> CreateOrganizerAsync(UserRegisterModelDto userRegisterModelDto, string role)
     {
-        var OrganizerEntity = new OrganizerEntity
+        using (var confdb_transaction = await _confContext.Database.BeginTransactionAsync())
+        using (var applicationdb_transaction = await _applicationDbContext.Database.BeginTransactionAsync())
         {
-            FirstName = userRegisterModelDto.FirstName,
-            LastName = userRegisterModelDto.LastName,
-            ContactNumber = userRegisterModelDto.ContactNumber,
-            Email = userRegisterModelDto.Email,
-            Gender = userRegisterModelDto.Gender
-        };
-        await _confContext.Organizers.AddAsync(OrganizerEntity);
-        await _confContext.SaveChangesAsync();
-        return OrganizerEntity.Id;
+            try
+            {
+                var userExists = await _userManager.FindByNameAsync(userRegisterModelDto.Email);
+                if (userExists != null)
+                    return "User already exists!";
+                IdentityUser user = new()
+                {
+                    Email = userRegisterModelDto.Email,
+                    SecurityStamp = Guid.NewGuid().ToString(),
+                    UserName = userRegisterModelDto.Email
+                };
+                if (await _roleManager.RoleExistsAsync(role))
+                {
+                    await _userManager.CreateAsync(user, userRegisterModelDto.Password);
+                    var OrganizerEntity = new OrganizerEntity
+                    {
+                        FirstName = userRegisterModelDto.FirstName,
+                        LastName = userRegisterModelDto.LastName,
+                        ContactNumber = userRegisterModelDto.ContactNumber,
+                        Email = userRegisterModelDto.Email,
+                        Gender = userRegisterModelDto.Gender
+                    };
+                    await _confContext.Organizers.AddAsync(OrganizerEntity);
+                    await _confContext.SaveChangesAsync();
+                    confdb_transaction.Commit();
+                    applicationdb_transaction.Commit();
+                    // return AttendeeEntity.Id;
+                    return "User created successfully!";
+                }
+                else
+                {
+                    return "Role does not exist!";
+                }
+            }
+            catch (Exception ex)
+            {
+                await confdb_transaction.RollbackAsync();
+                await applicationdb_transaction.RollbackAsync();
+                return ex.Message;
+            }
+        }
     }
+    /* var OrganizerEntity = new OrganizerEntity
+    {
+        FirstName = userRegisterModelDto.FirstName,
+        LastName = userRegisterModelDto.LastName,
+        ContactNumber = userRegisterModelDto.ContactNumber,
+        Email = userRegisterModelDto.Email,
+        Gender = userRegisterModelDto.Gender
+    };
+    await _confContext.Organizers.AddAsync(OrganizerEntity);
+    await _confContext.SaveChangesAsync();
+    return OrganizerEntity.Id; */
+
 }

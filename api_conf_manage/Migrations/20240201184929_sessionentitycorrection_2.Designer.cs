@@ -4,6 +4,7 @@ using Infrastructure.SQL.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace api_conf_manage.Migrations
 {
     [DbContext(typeof(ConfContext))]
-    partial class ConfContextModelSnapshot : ModelSnapshot
+    [Migration("20240201184929_sessionentitycorrection_2")]
+    partial class sessionentitycorrection_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +50,7 @@ namespace api_conf_manage.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Attendees", (string)null);
+                    b.ToTable("Attendees");
                 });
 
             modelBuilder.Entity("Infrastructure.SQL.Database.Entities.OrganizerEntity", b =>
@@ -75,7 +78,7 @@ namespace api_conf_manage.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Organizers", (string)null);
+                    b.ToTable("Organizers");
                 });
 
             modelBuilder.Entity("Infrastructure.SQL.Database.Entities.RoomEntity", b =>
@@ -94,7 +97,7 @@ namespace api_conf_manage.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rooms", (string)null);
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("Infrastructure.SQL.Database.Entities.SessionEntity", b =>
@@ -129,7 +132,7 @@ namespace api_conf_manage.Migrations
 
                     b.HasIndex("SpeakerEntityId");
 
-                    b.ToTable("Sessions", (string)null);
+                    b.ToTable("Sessions");
                 });
 
             modelBuilder.Entity("Infrastructure.SQL.Database.Entities.Session_AttendeeEntity", b =>
@@ -152,7 +155,7 @@ namespace api_conf_manage.Migrations
 
                     b.HasIndex("SessionEntityId");
 
-                    b.ToTable("Session_AttendeeEntities", (string)null);
+                    b.ToTable("Session_AttendeeEntities");
                 });
 
             modelBuilder.Entity("Infrastructure.SQL.Database.Entities.SpeakerEntity", b =>
@@ -186,7 +189,7 @@ namespace api_conf_manage.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Speakers", (string)null);
+                    b.ToTable("Speakers");
                 });
 
             modelBuilder.Entity("Infrastructure.SQL.Database.Entities.SessionEntity", b =>
