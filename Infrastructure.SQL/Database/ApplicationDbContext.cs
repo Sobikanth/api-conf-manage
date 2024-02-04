@@ -34,6 +34,12 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
                 Name = "Speaker",
                 NormalizedName = "SPEAKER",
                 ConcurrencyStamp = "3"
+            },
+            new IdentityRole
+            {
+                Name = "Attendee",
+                NormalizedName = "ATTENDEE",
+                ConcurrencyStamp = "4"
             }
         );
     }

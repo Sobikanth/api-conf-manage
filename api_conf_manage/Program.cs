@@ -5,6 +5,7 @@ using Azure.Identity;
 using BLL.Services;
 using Domain.Repositories;
 using Domain.Services;
+using FluentValidation;
 using Infrastructure.SQL.Database;
 using Infrastructure.SQL.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -60,6 +61,9 @@ builder.Services.AddScoped<IAttendeeMapper, AttendeeMapper>();
 builder.Services.AddScoped<ILogInModelMapper, LogInModelMapper>();
 builder.Services.AddScoped<IUserLogInService, UserLogInService>();
 
+
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
@@ -69,7 +73,7 @@ builder.Services.AddSwaggerGen(option =>
         option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
         {
             In = ParameterLocation.Header,
-            Description = "Enteryour token in the text input below.",
+            Description = "Enter your token in the text input below.",
             Name = "Authorization",
             Type = SecuritySchemeType.Http,
             BearerFormat = "JWT",

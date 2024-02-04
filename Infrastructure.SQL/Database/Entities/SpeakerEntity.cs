@@ -1,8 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Infrastructure.SQL.Database.Entities;
 
 public class SpeakerEntity
 {
-    public int Id { get; set; }
+    // public int Id { get; set; }
+    [Key]
+    public Guid SpeakerId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string ContactNumber { get; set; }

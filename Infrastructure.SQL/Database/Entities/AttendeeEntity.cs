@@ -4,8 +4,9 @@ namespace Infrastructure.SQL.Database.Entities;
 
 public class AttendeeEntity
 {
+    // public int Id { get; set; }
     [Key]
-    public int Id { get; set; }
+    public Guid AttendeeId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string ContactNumber { get; set; }

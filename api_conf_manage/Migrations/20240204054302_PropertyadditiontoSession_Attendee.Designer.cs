@@ -4,6 +4,7 @@ using Infrastructure.SQL.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace api_conf_manage.Migrations
 {
     [DbContext(typeof(ConfContext))]
-    partial class ConfContextModelSnapshot : ModelSnapshot
+    [Migration("20240204054302_PropertyadditiontoSession_Attendee")]
+    partial class PropertyadditiontoSession_Attendee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,9 +27,11 @@ namespace api_conf_manage.Migrations
 
             modelBuilder.Entity("Infrastructure.SQL.Database.Entities.AttendeeEntity", b =>
                 {
-                    b.Property<Guid>("AttendeeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ContactNumber")
                         .HasColumnType("nvarchar(max)");
@@ -43,16 +48,18 @@ namespace api_conf_manage.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AttendeeId");
+                    b.HasKey("Id");
 
                     b.ToTable("Attendees");
                 });
 
             modelBuilder.Entity("Infrastructure.SQL.Database.Entities.OrganizerEntity", b =>
                 {
-                    b.Property<Guid>("OrganizerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ContactNumber")
                         .HasColumnType("nvarchar(max)");
@@ -69,16 +76,18 @@ namespace api_conf_manage.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("OrganizerId");
+                    b.HasKey("Id");
 
                     b.ToTable("Organizers");
                 });
 
             modelBuilder.Entity("Infrastructure.SQL.Database.Entities.RoomEntity", b =>
                 {
-                    b.Property<Guid>("RoomId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Available")
                         .HasColumnType("nvarchar(max)");
@@ -86,16 +95,18 @@ namespace api_conf_manage.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.HasKey("RoomId");
+                    b.HasKey("Id");
 
                     b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("Infrastructure.SQL.Database.Entities.SessionEntity", b =>
                 {
-                    b.Property<Guid>("SessionId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateOnly>("ConfDate")
                         .HasColumnType("date");
@@ -103,11 +114,11 @@ namespace api_conf_manage.Migrations
                     b.Property<TimeOnly>("EndTime")
                         .HasColumnType("time");
 
-                    b.Property<Guid?>("RoomEntityRoomId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("RoomEntityId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("SpeakerEntitySpeakerId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("SpeakerEntityId")
+                        .HasColumnType("int");
 
                     b.Property<TimeOnly>("StartTime")
                         .HasColumnType("time");
@@ -115,41 +126,48 @@ namespace api_conf_manage.Migrations
                     b.Property<string>("Topic")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SessionId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("RoomEntityRoomId");
+                    b.HasIndex("RoomEntityId");
 
-                    b.HasIndex("SpeakerEntitySpeakerId");
+                    b.HasIndex("SpeakerEntityId");
 
                     b.ToTable("Sessions");
                 });
 
             modelBuilder.Entity("Infrastructure.SQL.Database.Entities.Session_AttendeeEntity", b =>
                 {
-                    b.Property<Guid>("Session_AttendeeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("AttendeeEntityAttendeeId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid?>("SessionEntitySessionId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("AttendeeEntityId")
+                        .HasColumnType("int");
 
-                    b.HasKey("Session_AttendeeId");
+                    b.Property<int?>("SessionEntityId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("AttendeeEntityAttendeeId");
+                    b.Property<string>("Topic")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("SessionEntitySessionId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttendeeEntityId");
+
+                    b.HasIndex("SessionEntityId");
 
                     b.ToTable("Session_AttendeeEntities");
                 });
 
             modelBuilder.Entity("Infrastructure.SQL.Database.Entities.SpeakerEntity", b =>
                 {
-                    b.Property<Guid>("SpeakerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ContactNumber")
                         .HasColumnType("nvarchar(max)");
@@ -172,7 +190,7 @@ namespace api_conf_manage.Migrations
                     b.Property<string>("University")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SpeakerId");
+                    b.HasKey("Id");
 
                     b.ToTable("Speakers");
                 });
@@ -181,11 +199,11 @@ namespace api_conf_manage.Migrations
                 {
                     b.HasOne("Infrastructure.SQL.Database.Entities.RoomEntity", "RoomEntity")
                         .WithMany("Sessions")
-                        .HasForeignKey("RoomEntityRoomId");
+                        .HasForeignKey("RoomEntityId");
 
                     b.HasOne("Infrastructure.SQL.Database.Entities.SpeakerEntity", "SpeakerEntity")
                         .WithMany("Sessions")
-                        .HasForeignKey("SpeakerEntitySpeakerId");
+                        .HasForeignKey("SpeakerEntityId");
 
                     b.Navigation("RoomEntity");
 
@@ -196,11 +214,11 @@ namespace api_conf_manage.Migrations
                 {
                     b.HasOne("Infrastructure.SQL.Database.Entities.AttendeeEntity", "AttendeeEntity")
                         .WithMany("Session_AttendeeEntities")
-                        .HasForeignKey("AttendeeEntityAttendeeId");
+                        .HasForeignKey("AttendeeEntityId");
 
                     b.HasOne("Infrastructure.SQL.Database.Entities.SessionEntity", "SessionEntity")
                         .WithMany("Session_AttendeeEntities")
-                        .HasForeignKey("SessionEntitySessionId");
+                        .HasForeignKey("SessionEntityId");
 
                     b.Navigation("AttendeeEntity");
 

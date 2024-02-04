@@ -8,18 +8,18 @@ namespace BLL.Services;
 
 public class UserRegisterService : IUserRegisterService
 {
-    private readonly UserManager<IdentityUser> _userManager;
+    // private readonly UserManager<IdentityUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
-    private readonly IConfiguration _configuration;
+    // private readonly IConfiguration _configuration;
     private readonly IUserRepository _userRepository;
-    public UserRegisterService(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, IUserRepository userRepository)
+    public UserRegisterService(RoleManager<IdentityRole> roleManager, IUserRepository userRepository)
     {
-        _userManager = userManager;
+        // _userManager = userManager;
         _roleManager = roleManager;
-        _configuration = configuration;
+        // _configuration = configuration;
         _userRepository = userRepository;
     }
-    public async Task<string> RegisterAsync(UserRegisterModelDto userRegisterModelDto,string? role)
+    public async Task<string> RegisterAsync(UserRegisterModelDto userRegisterModelDto, string role)
     {
         /* var userExists = await _userManager.FindByNameAsync(userRegisterModelDto.Email);
         if (userExists != null)
@@ -54,19 +54,9 @@ public class UserRegisterService : IUserRegisterService
         {
             return "Role does not exist!";
         } */
-    
-        if (role == null)
-        {
-        return await _userRepository.CreateAttendeeAsync(userRegisterModelDto);
-        }
-        else if (await _roleManager.RoleExistsAsync(role) )
-        {
-            return await _userRepository.CreateOrganizerAsync(userRegisterModelDto, role);
-        }
-        else
-        {
-            return "Role does not exist!";
-        }
-    
+        
+        return await _userRepository.CreateUserAsync(userRegisterModelDto, role);
+        
+
     }
 }

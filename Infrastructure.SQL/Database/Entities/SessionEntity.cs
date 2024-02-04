@@ -1,9 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Infrastructure.SQL.Database.Entities;
 
 public class SessionEntity
 {
     //Attributes: ID, Speaker ID, Room ID, Topic, Conf date, Start time, End time
-    public int Id { get; set; }
+    // public int Id { get; set; }
+    [Key]
+    public Guid SessionId { get; set; }
     public string Topic { get; set; }
     public DateOnly ConfDate { get; set; }
     public TimeOnly StartTime { get; set; }
