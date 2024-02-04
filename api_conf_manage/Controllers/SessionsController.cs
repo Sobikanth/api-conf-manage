@@ -4,67 +4,39 @@ using Infrastructure.SQL.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace api_conf_manage.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 
-public class BasicController : ControllerBase
+public class SessionsController : ControllerBase
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly ConfContext _confContext;
-    public BasicController(UserManager<IdentityUser> userManager, ConfContext confContext)
+    public SessionsController(UserManager<IdentityUser> userManager, ConfContext confContext)
     {
         _userManager = userManager;
         _confContext = confContext;
     }
     [HttpGet]
-    [Authorize(Roles = "Admin")]
-    [Route("GetAllUsers")]
-    public async Task<IActionResult> GetAllUsers()
-    {
-        var users = _userManager.Users.ToList();
-        return Ok(users);
-    }
-    [HttpGet]
-    [Authorize(Roles = "RoomCoordinator")]
-    [Route("GetAllRooms")]
-    public async Task<IActionResult> GetAllRooms()
-    {
-        var rooms = _confContext.Rooms.ToList();
-        return Ok(rooms);
-    }
-    [HttpGet]
-    [Authorize(Roles = "Speaker")]
-    [Route("GetConferenceDates")]
-    public async Task<IActionResult> GetConferenceDates()
-    {
-        var Sessions = _confContext.Sessions.ToList();
-        var conferenceDates = Sessions.Select(s => s.ConfDate).Distinct().ToList();
-        return Ok(conferenceDates);
-    }
-
-    /* [HttpGet]
-    [Authorize(Roles = "Attendee")]
-    [Route("GetUser")]
-    public async Task<IActionResult> GetUser()
-    {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
-        string userName = User.FindFirstValue(ClaimTypes.Name);
-        IEnumerable<Claim> claims = User.Claims;
-        return Ok(claims);
-    } */
-
-    /* [HttpGet]
-    [Authorize(Roles = "Attendee")]
+    [Authorize(Roles = "Admin, Speaker, RoomCoordinator, Attendee")]
     [Route("GetAllSessions")]
     public async Task<IActionResult> GetAllSessions()
     {
-        var sessions = _confContext.Sessions.ToList();
+        // var sessions = await _confContext.Sessions.ToListAsync();
+        var sessions = await _confContext.Sessions.Select(s => new
+        {
+            Id = s.SessionId,
+            s.Topic,
+            Date = s.ConfDate.ToString("dd/MM/yyyy"),
+            Time = s.StartTime.ToString("hh:mm tt") + " - " + s.EndTime.ToString("hh:mm tt"),
+            SpeakerName = "Speaker is: " + s.SpeakerEntity.FirstName + " " + s.SpeakerEntity.LastName,
+        }).ToListAsync();
         return Ok(sessions);
     }
- */
-    /* [HttpGet]
+
+    [HttpGet]
     [Authorize(Roles = "Attendee")]
     [Route("RegisterForSession")]
     public async Task<IActionResult> RegisterForSession(string sessionId)
@@ -79,7 +51,7 @@ public class BasicController : ControllerBase
                 SessionEntity = session,
                 AttendeeEntity = attendeeEntity
             };
-            _confContext.Session_AttendeeEntities.Add(sessionAttendee);
+            await _confContext.Session_AttendeeEntities.AddAsync(sessionAttendee);
             _confContext.SaveChanges();
             return Ok("Registered successfully");
         }
@@ -87,9 +59,9 @@ public class BasicController : ControllerBase
         {
             return BadRequest(e.Message);
         }
-    } */
+    }
 
-    /* [HttpGet]
+    [HttpGet]
     [Authorize(Roles = "Attendee")]
     [Route("GetRegisteredSessions")]
     public async Task<IActionResult> GetRegisteredSessions()
@@ -97,13 +69,20 @@ public class BasicController : ControllerBase
         try
         {
             string userName = User.FindFirstValue(ClaimTypes.Name);
-            var userId = _confContext.Attendees.FirstOrDefault(u => u.Email == userName).AttendeeId;
-            var sessions = _confContext.Session_AttendeeEntities.Where(s => s.AttendeeEntity.AttendeeId == userId).Select(s => s.SessionEntity).ToList();
+            var attendee = await _confContext.Attendees.FirstOrDefaultAsync(u => u.Email == userName);
+            var userId = attendee.AttendeeId;
+            var sessions = await _confContext.Session_AttendeeEntities.Where(s => s.AttendeeEntity.AttendeeId == userId).Select(s => new
+            {
+                s.SessionEntity.Topic,
+                Date = s.SessionEntity.ConfDate.ToString("dd/MM/yyyy"),
+                Time = s.SessionEntity.StartTime.ToString("hh:mm tt") + " - " + s.SessionEntity.StartTime.ToString("hh:mm tt"),
+                SpeakerName = s.SessionEntity.SpeakerEntity.FirstName + " " + s.SessionEntity.SpeakerEntity.LastName,
+            }).ToListAsync();
             return Ok(sessions);
         }
         catch (Exception e)
         {
             return BadRequest(e.Message);
         }
-    } */
+    }
 }

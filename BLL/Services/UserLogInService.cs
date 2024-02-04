@@ -45,7 +45,7 @@ public class UserLogInService : IUserLogInService
                 );
 
             var JWT_Token = new JwtSecurityTokenHandler().WriteToken(token);
-            return $"JWT Token is : {JWT_Token} and your role is : {userRoles.FirstOrDefault()}";
+            return $"{JWT_Token}";
         }
         return null;
 
