@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace BLL.Services;
+namespace Application.Services;
 
 public class UserLogInService : IUserLogInService
 {

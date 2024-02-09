@@ -1,4 +1,4 @@
-﻿namespace BLL;
+﻿namespace Application;
 
 public class Class1
 {

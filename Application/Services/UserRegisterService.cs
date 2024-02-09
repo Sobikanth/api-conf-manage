@@ -4,7 +4,7 @@ using Domain.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 
-namespace BLL.Services;
+namespace Application.Services;
 
 public class UserRegisterService : IUserRegisterService
 {
@@ -54,9 +54,9 @@ public class UserRegisterService : IUserRegisterService
         {
             return "Role does not exist!";
         } */
-        
+
         return await _userRepository.CreateUserAsync(userRegisterModelDto, role);
-        
+
 
     }
 }
