@@ -15,8 +15,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructureSQLServices(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = "Server=localhost;Database=clean_api_2;User Id=sa;Password=Docker@123;TrustServerCertificate=True;";
-        Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
+        // var connectionString = "Server=localhost;Database=clean_api_2;User Id=sa;Password=Docker@123;TrustServerCertificate=True;";
+        // Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
@@ -33,7 +33,7 @@ public static class DependencyInjection
         services.AddAuthentication()
             .AddBearerToken(IdentityConstants.BearerScheme);
 
-        services.AddAuthorizationBuilder();
+        // services.AddAuthorizationBuilder();
 
         services
             .AddIdentityCore<ApplicationUser>()
@@ -47,10 +47,10 @@ public static class DependencyInjection
         services.AddAuthorization(options =>
         {
             options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator));
-            options.AddPolicy(Policies.CanView, policy => policy.RequireRole(Roles.Administrator, Roles.Attendee, Roles.Organizer, Roles.Speaker));
-            options.AddPolicy(Policies.CanAdd, policy => policy.RequireRole(Roles.Administrator, Roles.Organizer));
-            options.AddPolicy(Policies.CanEdit, policy => policy.RequireRole(Roles.Administrator, Roles.Organizer));
-            options.AddPolicy(Policies.CanDelete, policy => policy.RequireRole(Roles.Administrator, Roles.Organizer));
+            options.AddPolicy(Policies.CanView, policy => policy.RequireRole(Roles.Administrator));
+            options.AddPolicy(Policies.CanAdd, policy => policy.RequireRole(Roles.Administrator));
+            options.AddPolicy(Policies.CanEdit, policy => policy.RequireRole(Roles.Administrator));
+            options.AddPolicy(Policies.CanDelete, policy => policy.RequireRole(Roles.Administrator));
         });
         return services;
     }

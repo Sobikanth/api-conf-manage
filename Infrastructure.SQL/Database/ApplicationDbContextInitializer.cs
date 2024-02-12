@@ -67,29 +67,22 @@ public class ApplicationDbContextInitializer
     {
         // Default roles
         var administratorRole = new IdentityRole(Roles.Administrator);
-        var attendeeRole = new IdentityRole(Roles.Attendee);
-        var speakerRole = new IdentityRole(Roles.Speaker);
-        var organizerRole = new IdentityRole(Roles.Organizer);
 
         if (_roleManager.Roles.All(r => r.Name != administratorRole.Name))
         {
             await _roleManager.CreateAsync(administratorRole);
         }
 
-        if (_roleManager.Roles.All(r => r.Name != attendeeRole.Name))
-        {
-            await _roleManager.CreateAsync(attendeeRole);
-        }
+        // Default users
+        var administrator = new ApplicationUser { UserName = "administrator@gmail.com", Email = "administrator@gmail.com", FirstName = "Admin", LastName = "Admin", ContactNumber = "123456789", Gender = "Female" };
 
-        if (_roleManager.Roles.All(r => r.Name != speakerRole.Name))
+        if (_userManager.Users.All(u => u.UserName != administrator.UserName))
         {
-            await _roleManager.CreateAsync(speakerRole);
+            await _userManager.CreateAsync(administrator, "Administrator@123");
+            if (!string.IsNullOrWhiteSpace(administratorRole.Name))
+            {
+                await _userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
+            }
         }
-
-        if (_roleManager.Roles.All(r => r.Name != organizerRole.Name))
-        {
-            await _roleManager.CreateAsync(organizerRole);
-        }
-
     }
 }

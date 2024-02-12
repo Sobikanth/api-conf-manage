@@ -12,9 +12,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     {
 
     }
-    public DbSet<AttendeeEntity> Attendees => Set<AttendeeEntity>();
+    // public DbSet<AttendeeEntity> Attendees => Set<AttendeeEntity>();
 
-    public DbSet<OrganizerEntity> Organizers => Set<OrganizerEntity>();
+    // public DbSet<OrganizerEntity> Organizers => Set<OrganizerEntity>();
 
     public DbSet<RoomEntity> Rooms => Set<RoomEntity>();
 

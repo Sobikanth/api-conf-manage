@@ -1,18 +1,18 @@
 ﻿# For more info on HTTP files go to https://aka.ms/vs/httpfile
 @Web_HostAddress = https://localhost:5132
 
-@Username=Hello123@gmail.com
-@Password=Hello@123
-@BearerToken=CfDJ8MwLMifcxcdGm3jtD7E8htdyFcSY1-QzEhvjq1nG2OJSh80_2YvIiZbGVjW0fXw3qADL81_MmINuoMCuI1H9AaSs6HIH6-JpMl7Ee1NglwOxmzpfiEWYXqSXBytFVgiKMAVI0z4k9JuzjMY4Mln9AWMKnEfiTOGxug4RNfb8iVkXJ_NTqVzehh_DBOAfg9yY-hF6OCwtvcO43_4E6Yrp5__qj5FQUVebWpvOTiY6ksOw8IkEBbgrnK_pI5EPlLAnXHlNZ8RYNzxomXq1eXubBF0q2O-VT63zgD_1wJ6hY4ArhZsHv9evAfoRtFnAuigH4mjjuG0JLcV3Ly-nyEnJbqj82EZchum2lhH4P0K9AdhWb5jlTtXVbB1kJ2S0Dc-stsxuGOw2x-SFHhzhxTe8SAzCHoey9jhchSp0ohsgA8xT7UAv8sVqimSFjmbkO0l9n9g0nE75InB0S6LEUDpEXz46s5y-_3vgW7ifNr1H-iDHXbFvr6mv76JucqIU4P6PiOo5pLQtSk3eVNqRsd8Y5RsuJUwVJGJA9kkALWq7lqk8UrVdG8Qa0WiN858YSNwi4ePuy8DdqM5tgyeDgDzrhCU
+@Username=administrator@gmail.com
+@Password=Administrator@123
+@BearerToken=CfDJ8MwLMifcxcdGm3jtD7E8htcSfFYH96wQH--L_7pLm7GDiJcqQYEyJMufuMZNh_Vsj3KfyZcZQTlAkPuN1Vz6P8mD5IsWS0yQN2h9Ndzamv1Nf4-6HmRrl_fF9da9n1NJ-WYW8ss6rucfXteOuzEzPxh11lagIWVk-s-x8n7fi1w4_PD6ubetAPAu0I97OL13xM5dEpxkLLB1fZdiG-pjSMX2obd4US7bu21SD-1fMpGlgiVXFs7j6jimlEc9ccl1mts_Am7JXU4nAy-vpp-B0dPmh7QFln03ihDSmDS3Vs72adq3z97na7RDK7R3ZchusxDUe2GbJXjvGndJDE933UGQlMRksseYSdMGtArKA2JvDf1-bJNS6zX7xGbDWGWfxvDn4TetWup3we6VYfy-9sZE3zKK3OXEXrK2ps199lnWiiyUXh0x2FJ4wcSEaiBPJCIrsmvJJdoWNGRT0dPPiXP6kns9uYw9jVec1kIX1jlJebUrKJZfquXEgcC_7ZDcgz2Rp6TLW4C6pVD5-a6A7jrbm8cyzSoSr09GsOhScpab93oHf0yqlKMGM5o_B6FPY7Tq_hgAp1NySE332dEcNWbWJlIRUYPNvwYRD3EQSj880UCcD3nzuBjibaRfrlw2WSRwrzmTsZSxPUSSY8nOdyRIgKbxj3Libma1TaGvUceQ-g-kjTrHPHGhoSg4yKQJNQ
 
 # POST Users Register
 POST {{Web_HostAddress}}/api/Users/Register
 Content-Type: application/json
 
 {
-  "username": "Hello123@gmail.com",
-  "password": "Hello@123",
-  "email": "Hello123@gmail.com"
+  "username": {{{Username}}},
+  "password": {{{Password}}},
+  "email": {{{Username}}}
 }
 
 ###
@@ -22,9 +22,9 @@ POST {{Web_HostAddress}}/api/Users/Login
 Content-Type: application/json
 
 {
-  "username": "Hello123@gmail.com",
-  "password": "Hello@123",
-  "email": "Hello123@gmail.com"
+  "username": "administrator@gmail.com",
+  "password": "Administrator@123",
+  "email": "administrator@gmail.com"
 }
 
 ###
@@ -46,21 +46,58 @@ Authorization: Bearer {{BearerToken}}
 
 ###
 
-# GET TodoLists
-GET {{Web_HostAddress}}/api/TodoLists
+# GET Rooms
+GET {{Web_HostAddress}}/api/Rooms
 Authorization: Bearer {{BearerToken}}
+
+
 
 ###
 
-# POST TodoLists
-POST {{Web_HostAddress}}/api/TodoLists
+# Create Speakers
+
+POST {{Web_HostAddress}}/api/Speaker
 Authorization: Bearer {{BearerToken}}
 Content-Type: application/json
 
-// CreateTodoListCommand
 {
-  "Title": "Backlog"
+  "Id":"250b7a75-c2a3-4283-bd24-517c8544a87f",
+  "University":"University of Washington",
+  "JobTitle":"Software Engineer"
 }
+
+###
+
+###
+
+# Create Speakers
+
+POST {{Web_HostAddress}}/api/Sessions
+Authorization: Bearer {{BearerToken}}
+Content-Type: application/json
+
+{
+  "Topic":"Nature",
+  "ConfDate":"2024-02-02",
+  "StartTime":"08:00:00",
+  "EndTime" : "17:00:00",
+  "SpeakerId":"250b7a75-c2a3-4283-bd24-517c8544a87f",
+  "RoomId" : "bb820f75-fa6a-44b5-1aa2-08dc2abaa4ea"
+}
+
+###
+
+# Create Rooms
+POST {{Web_HostAddress}}/api/Rooms
+Authorization: Bearer {{BearerToken}}
+Content-Type: application/json
+
+{
+  "capacity":50,
+  "available":"No"
+}
+
+###
 
 ###
 

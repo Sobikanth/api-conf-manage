@@ -1,7 +1,10 @@
+using Application.Common.Security;
+using Domain.Constants;
 using MediatR;
 
 namespace Application.WeatherForecasts.Queries.GetWeatherForecasts;
 
+[Authorize(Roles = Roles.Administrator)]
 public record GetWeatherForecastsQuery : IRequest<IEnumerable<WeatherForecast>>;
 
 public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecastsQuery, IEnumerable<WeatherForecast>>

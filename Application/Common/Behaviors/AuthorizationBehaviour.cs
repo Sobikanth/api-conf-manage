@@ -1,8 +1,8 @@
 using System.Reflection;
 using Application.Common.Exceptions;
 using Application.Common.Interfaces;
+using Application.Common.Security;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Application.Common.Behaviors;
 
@@ -59,19 +59,19 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
             }
 
             // Policy-based authorization
-            var authorizeAttributesWithPolicies = authorizeAttributes.Where(a => !string.IsNullOrWhiteSpace(a.Policy));
-            if (authorizeAttributesWithPolicies.Any())
-            {
-                foreach (var policy in authorizeAttributesWithPolicies.Select(a => a.Policy))
-                {
-                    var authorized = await _identityService.AuthorizeAsync(_user.Id, policy);
+            // var authorizeAttributesWithPolicies = authorizeAttributes.Where(a => !string.IsNullOrWhiteSpace(a.Policy));
+            // if (authorizeAttributesWithPolicies.Any())
+            // {
+            //     foreach (var policy in authorizeAttributesWithPolicies.Select(a => a.Policy))
+            //     {
+            //         var authorized = await _identityService.AuthorizeAsync(_user.Id, policy);
 
-                    if (!authorized)
-                    {
-                        throw new ForbiddenAccessException();
-                    }
-                }
-            }
+            //         if (!authorized)
+            //         {
+            //             throw new ForbiddenAccessException();
+            //         }
+            //     }
+            // }
         }
 
         // User is authorized / authorization not required
