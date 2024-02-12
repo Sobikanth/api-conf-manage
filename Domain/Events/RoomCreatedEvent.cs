@@ -1,11 +1,6 @@
 namespace Domain.Events;
 
-public class RoomCreatedEvent : BaseEvent
+public class RoomCreatedEvent(RoomEntity room) : BaseEvent
 {
-    public RoomCreatedEvent(RoomEntity room)
-    {
-        Room = room;
-    }
-
-    public RoomEntity Room { get; }
+    public RoomEntity Room { get; } = room;
 }

@@ -1,12 +1,14 @@
 using Application.Common.Interfaces;
 using Application.Common.Security;
+
 using Domain.Constants;
 using Domain.Entities;
+
 using MediatR;
 
 namespace Application.Speaker.Commands.CreateSpeaker;
 
-[Authorize(Roles = Roles.Administrator)]
+[Authorize(Roles = Roles.ADMINISTRATOR)]
 public record CreateSpeakerCommand : IRequest<string>
 {
     public Guid Id { get; init; }
@@ -15,14 +17,10 @@ public record CreateSpeakerCommand : IRequest<string>
 
 }
 
-public class CreateSpeakerCommandHandler : IRequestHandler<CreateSpeakerCommand, string>
+public class CreateSpeakerCommandHandler(IApplicationDbContext context) : IRequestHandler<CreateSpeakerCommand, string>
 {
-    private readonly IApplicationDbContext _context;
+    private readonly IApplicationDbContext _context = context;
 
-    public CreateSpeakerCommandHandler(IApplicationDbContext context)
-    {
-        _context = context;
-    }
     public async Task<string> Handle(CreateSpeakerCommand request, CancellationToken cancellationToken)
     {
         var entity = new SpeakerEntity

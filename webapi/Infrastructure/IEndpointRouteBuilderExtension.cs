@@ -1,5 +1,3 @@
-using Ardalis.GuardClauses;
-
 namespace webapi.Infrastructure;
 
 public static class IEndpointRouteBuilderExtension

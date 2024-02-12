@@ -1,14 +1,18 @@
 using System.Security.Claims;
+
 using Application.Common.Interfaces;
 
 namespace webapi.Services;
 
-public class CurrentUser : IUser
+public class CurrentUser(IHttpContextAccessor httpContextAccessor) : IUser
 {
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    public CurrentUser(IHttpContextAccessor httpContextAccessor)
+    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+
+    public string Id
     {
-        _httpContextAccessor = httpContextAccessor;
+        get
+        {
+            return _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
     }
-    public string Id => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
 }

@@ -1,25 +1,21 @@
 using Application.Common.Interfaces;
 using Application.Common.Models;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.SQL.Identity;
 
-public class IdentityService : IIdentityService
+public class IdentityService(
+    UserManager<ApplicationUser> userManager,
+    IUserClaimsPrincipalFactory<ApplicationUser> userClaimsPrincipalFactory,
+    IAuthorizationService authorizationService) : IIdentityService
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly IUserClaimsPrincipalFactory<ApplicationUser> _userClaimsPrincipalFactory;
-    private readonly IAuthorizationService _authorizationService;
-    public IdentityService(
-        UserManager<ApplicationUser> userManager,
-        IUserClaimsPrincipalFactory<ApplicationUser> userClaimsPrincipalFactory,
-        IAuthorizationService authorizationService)
-    {
-        _userManager = userManager;
-        _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
-        _authorizationService = authorizationService;
-    }
+    private readonly UserManager<ApplicationUser> _userManager = userManager;
+    private readonly IUserClaimsPrincipalFactory<ApplicationUser> _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
+    private readonly IAuthorizationService _authorizationService = authorizationService;
+
     public async Task<string?> GetUserNameAsync(string userId)
     {
         var user = await _userManager.Users.FirstAsync(u => u.Id == userId);

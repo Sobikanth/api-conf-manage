@@ -2,9 +2,9 @@ namespace Domain.Constants;
 
 public abstract class Policies
 {
-    public const string CanPurge = nameof(CanPurge);
-    public const string CanView = nameof(CanView);
-    public const string CanAdd = nameof(CanAdd);
-    public const string CanEdit = nameof(CanEdit);
-    public const string CanDelete = nameof(CanDelete);
+    public const string CANPURGE = nameof(CANPURGE);
+    public const string CANVIEW = nameof(CANVIEW);
+    public const string CANADD = nameof(CANADD);
+    public const string CANEDIT = nameof(CANEDIT);
+    public const string CANDELETE = nameof(CANDELETE);
 }

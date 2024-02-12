@@ -3,7 +3,7 @@
 
 @Username=administrator@gmail.com
 @Password=Administrator@123
-@BearerToken=CfDJ8MwLMifcxcdGm3jtD7E8htcSfFYH96wQH--L_7pLm7GDiJcqQYEyJMufuMZNh_Vsj3KfyZcZQTlAkPuN1Vz6P8mD5IsWS0yQN2h9Ndzamv1Nf4-6HmRrl_fF9da9n1NJ-WYW8ss6rucfXteOuzEzPxh11lagIWVk-s-x8n7fi1w4_PD6ubetAPAu0I97OL13xM5dEpxkLLB1fZdiG-pjSMX2obd4US7bu21SD-1fMpGlgiVXFs7j6jimlEc9ccl1mts_Am7JXU4nAy-vpp-B0dPmh7QFln03ihDSmDS3Vs72adq3z97na7RDK7R3ZchusxDUe2GbJXjvGndJDE933UGQlMRksseYSdMGtArKA2JvDf1-bJNS6zX7xGbDWGWfxvDn4TetWup3we6VYfy-9sZE3zKK3OXEXrK2ps199lnWiiyUXh0x2FJ4wcSEaiBPJCIrsmvJJdoWNGRT0dPPiXP6kns9uYw9jVec1kIX1jlJebUrKJZfquXEgcC_7ZDcgz2Rp6TLW4C6pVD5-a6A7jrbm8cyzSoSr09GsOhScpab93oHf0yqlKMGM5o_B6FPY7Tq_hgAp1NySE332dEcNWbWJlIRUYPNvwYRD3EQSj880UCcD3nzuBjibaRfrlw2WSRwrzmTsZSxPUSSY8nOdyRIgKbxj3Libma1TaGvUceQ-g-kjTrHPHGhoSg4yKQJNQ
+@BearerToken=CfDJ8MwLMifcxcdGm3jtD7E8hteTrSvnIR7alNPdpcj0Yeoi9dKpdcO9rvL7E0qH0F-rVjO_uY1EXc4oiNqRmYhvGKHMmqFwIZo3upMZmtTIJf7AUEqA2r-zC_om9sfH15VnpHHd5T_EROgLiDMM6fvak46YuOtWdo_8ZVFZw83b13C4CfX9_TwlNCzdHBBlQs2jpZGtnK1NT9OFmAex0qsLR00nm3AfBZkEvTmijRBbgcvndCDoZ91yi-QxZ83v9DQetgw9QXJ_HYHEtXAT71v1F_IEjKBAhk5RjJYavVczW_lC9RVjVi8yGBFr2Kuzp3Zzab4AA7oRfnNmjpbO3Ajm96OAjIEq9wnjCfYC1H2w8WceffeYTecDIb-2xC_NQ1W2bwJXsD_XXiy0UdQGyC-l7gF9Xs_0kOExfzzdpRVup_H4-pEQLQ6bmQUPCEo8n4nw9Ha1KtDCmCne-uNpl92kqb4TSkUStm-J0pTpKP9GvCTXB0aVizcxYDbbGerEfBo4UE5SZFlxj3SXOBzp8EBdyevS73YjiI0kJ8s6VhmNZLh1qyi1ZAxtztCiTnInpsTZFVtkBWX-YCPFt4CorJe2_0CvUSb3A8DGJu9zYlUlC681DSbHhghOOWZoa7h9x5chwAvmWPCX_rYJBgk7orSICRKVXdZqjoN60JDKg7feqfH0UONbhV8F-eBJ4fNWNSTs_w
 
 # POST Users Register
 POST {{Web_HostAddress}}/api/Users/Register
@@ -50,8 +50,6 @@ Authorization: Bearer {{BearerToken}}
 GET {{Web_HostAddress}}/api/Rooms
 Authorization: Bearer {{BearerToken}}
 
-
-
 ###
 
 # Create Speakers
@@ -70,7 +68,7 @@ Content-Type: application/json
 
 ###
 
-# Create Speakers
+# Create Sessions
 
 POST {{Web_HostAddress}}/api/Sessions
 Authorization: Bearer {{BearerToken}}
@@ -96,83 +94,5 @@ Content-Type: application/json
   "capacity":50,
   "available":"No"
 }
-
-###
-
-###
-
-# PUT TodoLists
-PUT {{Web_HostAddress}}/api/TodoLists/1
-Authorization: Bearer {{BearerToken}}
-Content-Type: application/json
-
-// UpdateTodoListCommand
-{
-  "Id": 1,
-  "Title": "Product Backlog"
-}
-
-###
-
-# DELETE TodoLists
-DELETE {{Web_HostAddress}}/api/TodoLists/1
-Authorization: Bearer {{BearerToken}}
-
-###
-
-# GET TodoItems
-@PageNumber = 1
-@PageSize = 10
-GET {{Web_HostAddress}}/api/TodoItems?ListId=1&PageNumber={{PageNumber}}&PageSize={{PageSize}}
-
-Authorization: Bearer {{BearerToken}}
-
-###
-
-# POST TodoItems
-POST {{Web_HostAddress}}/api/TodoItems
-Authorization: Bearer {{BearerToken}}
-Content-Type: application/json
-
-// CreateTodoItemCommand
-{
-  "ListId": 1,
-  "Title": "Eat a burrito 🌯"
-}
-
-###
-
-#PUT TodoItems UpdateItemDetails
-PUT {{Web_HostAddress}}/api/TodoItems/UpdateItemDetails?Id=1
-Authorization: Bearer {{BearerToken}}
-Content-Type: application/json
-
-// UpdateTodoItemDetailCommand
-{
-  "Id": 1,
-  "ListId": 1,
-  "Priority": 3,
-  "Note": "This is a good idea!"
-}
-
-###
-
-# PUT TodoItems
-PUT {{Web_HostAddress}}/api/TodoItems/1
-Authorization: Bearer {{BearerToken}}
-Content-Type: application/json
-
-// UpdateTodoItemCommand
-{
-  "Id": 1,
-  "Title": "Eat a yummy burrito 🌯",
-  "Done": true
-}
-
-###
-
-# DELETE TodoItem
-DELETE {{Web_HostAddress}}/api/TodoItems/1
-Authorization: Bearer {{BearerToken}}
 
 ###

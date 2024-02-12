@@ -1,23 +1,20 @@
 using Application.Common.Interfaces;
 using Application.Common.Security;
+
 using Domain.Constants;
 using Domain.Entities;
-using Domain.Events;
+
 using MediatR;
 
 namespace Application.Rooms.Commands.CreateRoom;
 
-[Authorize(Roles = Roles.Administrator)]
-[Authorize(Policy = Policies.CanAdd)]
-public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, Guid>
+[Authorize(Roles = Roles.ADMINISTRATOR)]
+[Authorize(Policy = Policies.CANADD)]
+public class CreateRoomCommandHandler(IApplicationDbContext context) : IRequestHandler<CreateRoomCommand, Guid>
 {
 
-    private readonly IApplicationDbContext _context;
+    private readonly IApplicationDbContext _context = context;
 
-    public CreateRoomCommandHandler(IApplicationDbContext context)
-    {
-        _context = context;
-    }
     public async Task<Guid> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
     {
         var entity = new RoomEntity

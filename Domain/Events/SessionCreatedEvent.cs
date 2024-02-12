@@ -1,10 +1,6 @@
 namespace Domain.Events;
 
-public class SessionCreatedEvent : BaseEvent
+public class SessionCreatedEvent(SessionEntity session) : BaseEvent
 {
-    public SessionCreatedEvent(SessionEntity session)
-    {
-        Session = session;
-    }
-    public SessionEntity Session { get; }
+    public SessionEntity Session { get; } = session;
 }

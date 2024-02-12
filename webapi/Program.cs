@@ -1,4 +1,5 @@
 using Infrastructure.SQL.Database;
+
 using webapi.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddApplicationServices();
-builder.Services.AddInfrastructureSQLServices(builder.Configuration);
-builder.Services.AddWebServices();
+builder.Services.AddInfrastructureSQLServices();
+builder.Services.AddWebServices(builder.Configuration);
 
 
 var app = builder.Build();

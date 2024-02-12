@@ -1,28 +1,47 @@
 using Application.Common.Interfaces;
+
 using Domain.Entities;
+
 using Infrastructure.SQL.Identity;
+
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.SQL.Database;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options), IApplicationDbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    public DbSet<RoomEntity> Rooms
     {
-
+        get
+        {
+            return Set<RoomEntity>();
+        }
     }
-    // public DbSet<AttendeeEntity> Attendees => Set<AttendeeEntity>();
 
-    // public DbSet<OrganizerEntity> Organizers => Set<OrganizerEntity>();
+    public DbSet<SessionAttendeeEntity> SessionAttendees
+    {
+        get
+        {
+            return Set<SessionAttendeeEntity>();
+        }
+    }
 
-    public DbSet<RoomEntity> Rooms => Set<RoomEntity>();
+    public DbSet<SessionEntity> Sessions
+    {
+        get
+        {
+            return Set<SessionEntity>();
+        }
+    }
 
-    public DbSet<SessionAttendeeEntity> SessionAttendees => Set<SessionAttendeeEntity>();
-
-    public DbSet<SessionEntity> Sessions => Set<SessionEntity>();
-
-    public DbSet<SpeakerEntity> Speakers => Set<SpeakerEntity>();
+    public DbSet<SpeakerEntity> Speakers
+    {
+        get
+        {
+            return Set<SpeakerEntity>();
+        }
+    }
 
     //Uncomment if there is any configuration for the entities
     /* protected override void OnModelCreating(ModelBuilder builder)

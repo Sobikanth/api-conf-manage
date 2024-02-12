@@ -1,4 +1,5 @@
 using Application.Speaker.Commands.CreateSpeaker;
+
 using webapi.Infrastructure;
 
 namespace webapi.EndPoints;

@@ -1,23 +1,19 @@
 using System.Reflection;
+
 using Application.Common.Exceptions;
 using Application.Common.Interfaces;
 using Application.Common.Security;
+
 using MediatR;
 
 namespace Application.Common.Behaviors;
 
-public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
+public class AuthorizationBehaviour<TRequest, TResponse>(
+    IUser user,
+    IIdentityService identityService) : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {
-    private readonly IUser _user;
-    private readonly IIdentityService _identityService;
-
-    public AuthorizationBehaviour(
-        IUser user,
-        IIdentityService identityService)
-    {
-        _user = user;
-        _identityService = identityService;
-    }
+    private readonly IUser _user = user;
+    private readonly IIdentityService _identityService = identityService;
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
@@ -59,19 +55,19 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
             }
 
             // Policy-based authorization
-            // var authorizeAttributesWithPolicies = authorizeAttributes.Where(a => !string.IsNullOrWhiteSpace(a.Policy));
-            // if (authorizeAttributesWithPolicies.Any())
-            // {
-            //     foreach (var policy in authorizeAttributesWithPolicies.Select(a => a.Policy))
-            //     {
-            //         var authorized = await _identityService.AuthorizeAsync(_user.Id, policy);
+            var authorizeAttributesWithPolicies = authorizeAttributes.Where(a => !string.IsNullOrWhiteSpace(a.Policy));
+            if (authorizeAttributesWithPolicies.Any())
+            {
+                foreach (var policy in authorizeAttributesWithPolicies.Select(a => a.Policy))
+                {
+                    var authorized = await _identityService.AuthorizeAsync(_user.Id, policy);
 
-            //         if (!authorized)
-            //         {
-            //             throw new ForbiddenAccessException();
-            //         }
-            //     }
-            // }
+                    if (!authorized)
+                    {
+                        throw new ForbiddenAccessException();
+                    }
+                }
+            }
         }
 
         // User is authorized / authorization not required

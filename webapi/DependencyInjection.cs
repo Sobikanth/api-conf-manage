@@ -3,8 +3,6 @@ using Infrastructure.SQL.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using NSwag;
-using NSwag.Generation.Processors.Security;
 using webapi.Infrastructure;
 using webapi.Services;
 using ZymLabs.NSwag.FluentValidation;
@@ -13,12 +11,16 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddWebServices(this IServiceCollection services)
+    public static IServiceCollection AddWebServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDatabaseDeveloperPageExceptionFilter();
+
         services.AddScoped<IUser, CurrentUser>();
+
         services.AddHttpContextAccessor();
+
         services.AddExceptionHandler<CustomExceptionHandler>();
+
         services.AddScoped(provider =>
         {
             var validationRules = provider.GetService<IEnumerable<FluentValidationRule>>();
@@ -27,7 +29,10 @@ public static class DependencyInjection
             return new FluentValidationSchemaProcessor(provider, validationRules, loggerFactory);
         });
 
-        var connectionString = "Server=localhost;Database=clean_api_2;User Id=sa;Password=Docker@123;TrustServerCertificate=True;";
+        var connectionString = configuration["ConnectionString:dBConnection"];
+
+        Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
+
         services.AddDbContext<ApplicationDbContext>((sp, options) =>
                 {
                     options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
@@ -39,22 +44,6 @@ public static class DependencyInjection
             options.SuppressModelStateInvalidFilter = true);
 
         services.AddEndpointsApiExplorer();
-
-        services.AddOpenApiDocument((configure, sp) =>
-        {
-            configure.Title = "confmanage API";
-
-            // Add JWT
-            configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
-            {
-                Type = OpenApiSecuritySchemeType.ApiKey,
-                Name = "Authorization",
-                In = OpenApiSecurityApiKeyLocation.Header,
-                Description = "Type into the textbox: Bearer {your JWT token}."
-            });
-
-            configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
-        });
 
         return services;
     }

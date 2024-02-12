@@ -1,5 +1,7 @@
 using Domain.Constants;
+
 using Infrastructure.SQL.Identity;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,23 +24,17 @@ public static class InitializerExtensions
     }
 }
 
-public class ApplicationDbContextInitializer
+public class ApplicationDbContextInitializer(
+    ApplicationDbContext context,
+    UserManager<ApplicationUser> userManager,
+    RoleManager<IdentityRole> roleManager,
+    ILogger<ApplicationDbContextInitializer> logger)
 {
-    private readonly ILogger<ApplicationDbContextInitializer> _logger;
-    private readonly ApplicationDbContext _context;
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly RoleManager<IdentityRole> _roleManager;
-    public ApplicationDbContextInitializer(
-        ApplicationDbContext context,
-        UserManager<ApplicationUser> userManager,
-        RoleManager<IdentityRole> roleManager,
-        ILogger<ApplicationDbContextInitializer> logger)
-    {
-        _context = context;
-        _userManager = userManager;
-        _roleManager = roleManager;
-        _logger = logger;
-    }
+    private readonly ILogger<ApplicationDbContextInitializer> _logger = logger;
+    private readonly ApplicationDbContext _context = context;
+    private readonly UserManager<ApplicationUser> _userManager = userManager;
+    private readonly RoleManager<IdentityRole> _roleManager = roleManager;
+
     public async Task InitializeAsync()
     {
         try
@@ -66,7 +62,7 @@ public class ApplicationDbContextInitializer
     public async Task TrySeedAsync()
     {
         // Default roles
-        var administratorRole = new IdentityRole(Roles.Administrator);
+        var administratorRole = new IdentityRole(Roles.ADMINISTRATOR);
 
         if (_roleManager.Roles.All(r => r.Name != administratorRole.Name))
         {
@@ -81,7 +77,7 @@ public class ApplicationDbContextInitializer
             await _userManager.CreateAsync(administrator, "Administrator@123");
             if (!string.IsNullOrWhiteSpace(administratorRole.Name))
             {
-                await _userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
+                await _userManager.AddToRolesAsync(administrator, [administratorRole.Name]);
             }
         }
     }

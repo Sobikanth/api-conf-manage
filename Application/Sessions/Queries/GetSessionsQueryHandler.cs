@@ -1,22 +1,20 @@
 using Application.Common.Interfaces;
+
 using AutoMapper;
+
 using MediatR;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Sessions.Queries;
 
 public record GetSessionsQuery : IRequest<SessionDto>;
 
-public class GetSessionsQueryHandler : IRequestHandler<GetSessionsQuery, SessionDto>
+public class GetSessionsQueryHandler(IApplicationDbContext context, IMapper mapper) : IRequestHandler<GetSessionsQuery, SessionDto>
 {
-    private readonly IApplicationDbContext _context;
-    private readonly IMapper _mapper;
+    private readonly IApplicationDbContext _context = context;
+    private readonly IMapper _mapper = mapper;
 
-    public GetSessionsQueryHandler(IApplicationDbContext context, IMapper mapper)
-    {
-        _context = context;
-        _mapper = mapper;
-    }
     public async Task<SessionDto> Handle(GetSessionsQuery request, CancellationToken cancellationToken)
     {
         var session = await _context.Sessions

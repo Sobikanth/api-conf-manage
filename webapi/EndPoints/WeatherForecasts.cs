@@ -1,4 +1,5 @@
 using Application.WeatherForecasts.Queries.GetWeatherForecasts;
+
 using webapi.Infrastructure;
 
 namespace webapi.EndPoints;
