@@ -7,14 +7,27 @@ using Infrastructure.SQL.Database.Interceptors;
 using Infrastructure.SQL.Identity;
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
+
+
 
 namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructureSQLServices(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructureSQLServices(this IServiceCollection services, IConfiguration configuration)
     {
+
+        services.AddDbContext<ApplicationDbContext>((sp, options) =>
+        {
+            options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+
+            options.UseSqlite("Data Source=Conf_Manage.sqlite");
+        });
+
+
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());

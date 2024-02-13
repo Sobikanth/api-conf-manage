@@ -11,7 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddWebServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddWebServices(this IServiceCollection services)
     {
         services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -28,17 +28,6 @@ public static class DependencyInjection
 
             return new FluentValidationSchemaProcessor(provider, validationRules, loggerFactory);
         });
-
-        var connectionString = configuration["ConnectionString:dBConnection"];
-
-        Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
-
-        services.AddDbContext<ApplicationDbContext>((sp, options) =>
-                {
-                    options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
-
-                    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("webapi"));
-                });
 
         services.Configure<ApiBehaviorOptions>(options =>
             options.SuppressModelStateInvalidFilter = true);

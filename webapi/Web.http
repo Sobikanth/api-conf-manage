@@ -1,18 +1,32 @@
 ﻿# For more info on HTTP files go to https://aka.ms/vs/httpfile
 @Web_HostAddress = https://localhost:5132
 
+// Admin
 @Username=administrator@gmail.com
 @Password=Administrator@123
-@BearerToken=CfDJ8MwLMifcxcdGm3jtD7E8hteTrSvnIR7alNPdpcj0Yeoi9dKpdcO9rvL7E0qH0F-rVjO_uY1EXc4oiNqRmYhvGKHMmqFwIZo3upMZmtTIJf7AUEqA2r-zC_om9sfH15VnpHHd5T_EROgLiDMM6fvak46YuOtWdo_8ZVFZw83b13C4CfX9_TwlNCzdHBBlQs2jpZGtnK1NT9OFmAex0qsLR00nm3AfBZkEvTmijRBbgcvndCDoZ91yi-QxZ83v9DQetgw9QXJ_HYHEtXAT71v1F_IEjKBAhk5RjJYavVczW_lC9RVjVi8yGBFr2Kuzp3Zzab4AA7oRfnNmjpbO3Ajm96OAjIEq9wnjCfYC1H2w8WceffeYTecDIb-2xC_NQ1W2bwJXsD_XXiy0UdQGyC-l7gF9Xs_0kOExfzzdpRVup_H4-pEQLQ6bmQUPCEo8n4nw9Ha1KtDCmCne-uNpl92kqb4TSkUStm-J0pTpKP9GvCTXB0aVizcxYDbbGerEfBo4UE5SZFlxj3SXOBzp8EBdyevS73YjiI0kJ8s6VhmNZLh1qyi1ZAxtztCiTnInpsTZFVtkBWX-YCPFt4CorJe2_0CvUSb3A8DGJu9zYlUlC681DSbHhghOOWZoa7h9x5chwAvmWPCX_rYJBgk7orSICRKVXdZqjoN60JDKg7feqfH0UONbhV8F-eBJ4fNWNSTs_w
+@BearerToken=CfDJ8MwLMifcxcdGm3jtD7E8htePdHhshmLHRjZ8OJ6xprQPHqmDMgtMDn0ZliBC58m4OO35YB0o2TqpRuWzTA5nvSyLwX+WSdPBb5OchhCy3iutFYxTFdTw8vgAcNp9Ak8Jk3p2RX7YtTl7GTgAKI3B5CGvGHwEjB6RqbM+G0SeAHBNlf/njscZTYW2XpDSa6c4+miZMFQ3d85vUNHV518G6K8aDu1wWJ9ARZ8f17IZsQ/8U8cXwivtsjDYJJP57nwdNw==
+
+# @Username=Speaker@gmail.com
+# @Password=Speaker@123
+# @Email=Speaker@gmail.com
+# @FirstName=Speaker
+# @LastName=Speaker
+# @PhoneNumber=1234567890
+# @Gender=Female
+# @BearerToken=<Your Bearer Code>
 
 # POST Users Register
 POST {{Web_HostAddress}}/api/Users/Register
 Content-Type: application/json
 
 {
-  "username": {{{Username}}},
-  "password": {{{Password}}},
-  "email": {{{Username}}}
+  "UserName": "abcxyz1@gmail.com",
+  "Password": "Administrator@123",
+  "Email": "abcxyz1@gmail.com",
+  "PhoneNumber": "123456789",
+  "FirstName": "abcxyz1",
+  "LastName": "abcxyz1",
+  "Gender": "Male"
 }
 
 ###
@@ -22,9 +36,9 @@ POST {{Web_HostAddress}}/api/Users/Login
 Content-Type: application/json
 
 {
-  "username": "administrator@gmail.com",
-  "password": "Administrator@123",
-  "email": "administrator@gmail.com"
+  "username": "{{Username}}",
+  "password": "{{Password}}",
+  "email": "{{Username}}"
 }
 
 ###
@@ -53,7 +67,6 @@ Authorization: Bearer {{BearerToken}}
 ###
 
 # Create Speakers
-
 POST {{Web_HostAddress}}/api/Speaker
 Authorization: Bearer {{BearerToken}}
 Content-Type: application/json
@@ -66,10 +79,7 @@ Content-Type: application/json
 
 ###
 
-###
-
 # Create Sessions
-
 POST {{Web_HostAddress}}/api/Sessions
 Authorization: Bearer {{BearerToken}}
 Content-Type: application/json

@@ -63,14 +63,24 @@ public class ApplicationDbContextInitializer(
     {
         // Default roles
         var administratorRole = new IdentityRole(Roles.ADMINISTRATOR);
+        var speakerRole = new IdentityRole(Roles.SPEAKER);
+        var attendeeRole = new IdentityRole(Roles.ATTENDEE);
 
         if (_roleManager.Roles.All(r => r.Name != administratorRole.Name))
         {
             await _roleManager.CreateAsync(administratorRole);
         }
+        if (_roleManager.Roles.All(r => r.Name != speakerRole.Name))
+        {
+            await _roleManager.CreateAsync(speakerRole);
+        }
+        if (_roleManager.Roles.All(r => r.Name != attendeeRole.Name))
+        {
+            await _roleManager.CreateAsync(attendeeRole);
+        }
 
         // Default users
-        var administrator = new ApplicationUser { UserName = "administrator@gmail.com", Email = "administrator@gmail.com", FirstName = "Admin", LastName = "Admin", ContactNumber = "123456789", Gender = "Female" };
+        var administrator = new ApplicationUser { UserName = "administrator@gmail.com", Email = "administrator@gmail.com", FirstName = "Admin", LastName = "Admin", PhoneNumber = "123456789", Gender = "Female" };
 
         if (_userManager.Users.All(u => u.UserName != administrator.UserName))
         {

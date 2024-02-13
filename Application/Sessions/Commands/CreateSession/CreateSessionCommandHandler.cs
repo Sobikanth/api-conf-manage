@@ -15,6 +15,7 @@ public class CreateSessionCommandHandler(IApplicationDbContext context) : IReque
 
     public async Task<string> Handle(CreateSessionCommand request, CancellationToken cancellationToken)
     {
+#pragma warning disable CS8601 // Possible null reference assignment.
         var entity = new SessionEntity
         {
             Topic = request.Topic,
@@ -24,7 +25,8 @@ public class CreateSessionCommandHandler(IApplicationDbContext context) : IReque
             SpeakerEntity = _context.Speakers.Find(request.SpeakerId),
             RoomEntity = _context.Rooms.Find(request.RoomId)
         };
-        // entity.AddDomainEvent(new SessionCreatedEvent(entity));
+#pragma warning restore CS8601 // Possible null reference assignment.
+                              // entity.AddDomainEvent(new SessionCreatedEvent(entity));
         _context.Sessions.Add(entity);
         await _context.SaveChangesAsync(cancellationToken);
         return entity.Topic;
