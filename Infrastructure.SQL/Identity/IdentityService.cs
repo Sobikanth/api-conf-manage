@@ -18,9 +18,16 @@ public class IdentityService(
 
     public async Task<string?> GetUserNameAsync(string userId)
     {
-        var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
+        try
+        {
+            var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
 
-        return user.UserName;
+            return user.UserName;
+        }
+        catch (System.Exception)
+        {
+            return null;
+        }
     }
 
     public async Task<(Result Result, Guid UserId)> RegisterUserAsync(string userName, string password, string phoneNumber, string firstName, string lastName, string gender)
@@ -91,24 +98,16 @@ public class IdentityService(
         return result.ToApplicationResult();
     }
 
-    public async Task<(Result result, string token)> LoginUserAsync(string userName, string password)
+    public async Task<string?> GetUserIdAsync(string userName, string password)
     {
-        var user = await _userManager.FindByNameAsync(userName);
+        var user = _userManager.Users.SingleOrDefault(u => u.UserName == userName);
+        return user != null && await _userManager.CheckPasswordAsync(user, password) ? user.Id : null;
+    }
 
-        if (user == null)
-        {
-            return (Result.Failure(new[] { "User does not exist." }), null);
-        }
+    public async Task<List<string>> GetUserRolesAsync(string userId)
+    {
+        var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
 
-        var result = await _userManager.CheckPasswordAsync(user, password);
-
-        if (!result)
-        {
-            return (Result.Failure(new[] { "Invalid password." }), null);
-        }
-
-        var token = await _userManager.GenerateUserTokenAsync(user, TokenOptions.DefaultProvider, "passwordless-auth");
-
-        return (Result.Success(), token);
+        return user != null ? (await _userManager.GetRolesAsync(user)).ToList() : new List<string>();
     }
 }

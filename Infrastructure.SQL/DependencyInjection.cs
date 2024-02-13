@@ -5,7 +5,9 @@ using Domain.Constants;
 using Infrastructure.SQL.Database;
 using Infrastructure.SQL.Database.Interceptors;
 using Infrastructure.SQL.Identity;
-
+using Infrastructure.SQL.Security.TokenGenerator;
+using Infrastructure.SQL.Security.TokenValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -34,10 +36,12 @@ public static class DependencyInjection
 
         services.AddScoped<ApplicationDbContextInitializer>();
 
-        services.AddAuthentication()
-            .AddBearerToken(IdentityConstants.BearerScheme);
+        services.AddAuthentication(configuration);
+        // .AddBearerToken(IdentityConstants.BearerScheme);
 
         // services.AddAuthorizationBuilder();
+
+
 
         services
             .AddIdentityCore<ApplicationUser>()
@@ -54,6 +58,19 @@ public static class DependencyInjection
             .AddPolicy(Policies.CANADD, policy => policy.RequireRole(Roles.ADMINISTRATOR))
             .AddPolicy(Policies.CANEDIT, policy => policy.RequireRole(Roles.ADMINISTRATOR))
             .AddPolicy(Policies.CANDELETE, policy => policy.RequireRole(Roles.ADMINISTRATOR));
+        return services;
+    }
+    private static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.Section));
+
+        services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+
+        services
+            .ConfigureOptions<JwtBearerTokenValidationConfiguration>()
+            .AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer();
+
         return services;
     }
 }

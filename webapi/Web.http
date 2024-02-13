@@ -4,7 +4,7 @@
 // Admin
 @Username=administrator@gmail.com
 @Password=Administrator@123
-@BearerToken=CfDJ8MwLMifcxcdGm3jtD7E8htePdHhshmLHRjZ8OJ6xprQPHqmDMgtMDn0ZliBC58m4OO35YB0o2TqpRuWzTA5nvSyLwX+WSdPBb5OchhCy3iutFYxTFdTw8vgAcNp9Ak8Jk3p2RX7YtTl7GTgAKI3B5CGvGHwEjB6RqbM+G0SeAHBNlf/njscZTYW2XpDSa6c4+miZMFQ3d85vUNHV518G6K8aDu1wWJ9ARZ8f17IZsQ/8U8cXwivtsjDYJJP57nwdNw==
+@BearerToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljODdlYzcyLWMxMGMtNGQ1MS1iMDgyLTE2MWE0NTk3MDlmNCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbmlzdHJhdG9yQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOSVNUUkFUT1IiLCJleHAiOjE3MDc4NTIyMDksImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUxMzIiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MTMyIn0.F74YuFTIxzNZByP0RTAbyotySg_pCDfovJDBhQb31vY
 
 # @Username=Speaker@gmail.com
 # @Password=Speaker@123
@@ -20,12 +20,12 @@ POST {{Web_HostAddress}}/api/Users/Register
 Content-Type: application/json
 
 {
-  "UserName": "abcxyz1@gmail.com",
-  "Password": "Administrator@123",
-  "Email": "abcxyz1@gmail.com",
+  "UserName": "Speaker@gmail.com",
+  "Password": "Speaker@123",
+  "Email": "Speaker@gmail.com",
   "PhoneNumber": "123456789",
-  "FirstName": "abcxyz1",
-  "LastName": "abcxyz1",
+  "FirstName": "Speaker",
+  "LastName": "Speaker",
   "Gender": "Male"
 }
 
@@ -72,7 +72,7 @@ Authorization: Bearer {{BearerToken}}
 Content-Type: application/json
 
 {
-  "Id":"250b7a75-c2a3-4283-bd24-517c8544a87f",
+  "Id":"3eb8365a-90bb-438e-bf90-7bc01ab9c8ee",
   "University":"University of Washington",
   "JobTitle":"Software Engineer"
 }
@@ -86,11 +86,11 @@ Content-Type: application/json
 
 {
   "Topic":"Nature",
-  "ConfDate":"2024-02-02",
+  "ConfDate":"2024-02-20",
   "StartTime":"08:00:00",
   "EndTime" : "17:00:00",
-  "SpeakerId":"250b7a75-c2a3-4283-bd24-517c8544a87f",
-  "RoomId" : "bb820f75-fa6a-44b5-1aa2-08dc2abaa4ea"
+  "SpeakerId":"3eb8365a-90bb-438e-bf90-7bc01ab9c8ee",
+  "RoomId" : "a1a5188b-16f0-49e8-9734-0978e3177727"
 }
 
 ###
@@ -101,8 +101,8 @@ Authorization: Bearer {{BearerToken}}
 Content-Type: application/json
 
 {
-  "capacity":50,
-  "available":"No"
+  "capacity":75,
+  "available":"Yes"
 }
 
 ###
