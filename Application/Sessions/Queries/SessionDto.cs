@@ -11,8 +11,6 @@ public class SessionDto
     public DateOnly ConfDate { get; init; }
     public TimeOnly StartTime { get; init; }
     public TimeOnly EndTime { get; init; }
-    public SpeakerEntity Speaker { get; init; } = null!;
-    public RoomEntity Room { get; init; } = null!;
 
     private class Mapping : Profile
     {

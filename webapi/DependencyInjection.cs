@@ -1,10 +1,10 @@
 using Application.Common.Interfaces;
-using Infrastructure.SQL.Database;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore;
+
 using webapi.Infrastructure;
 using webapi.Services;
+
 using ZymLabs.NSwag.FluentValidation;
 
 namespace Microsoft.Extensions.DependencyInjection;

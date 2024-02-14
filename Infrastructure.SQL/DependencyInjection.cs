@@ -1,12 +1,11 @@
 using Application.Common.Interfaces;
 
-using Domain.Constants;
-
 using Infrastructure.SQL.Database;
 using Infrastructure.SQL.Database.Interceptors;
 using Infrastructure.SQL.Identity;
 using Infrastructure.SQL.Security.TokenGenerator;
 using Infrastructure.SQL.Security.TokenValidation;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -37,11 +36,6 @@ public static class DependencyInjection
         services.AddScoped<ApplicationDbContextInitializer>();
 
         services.AddAuthentication(configuration);
-        // .AddBearerToken(IdentityConstants.BearerScheme);
-
-        // services.AddAuthorizationBuilder();
-
-
 
         services
             .AddIdentityCore<ApplicationUser>()
@@ -52,12 +46,7 @@ public static class DependencyInjection
         services.AddSingleton(TimeProvider.System);
         services.AddTransient<IIdentityService, IdentityService>();
 
-        services.AddAuthorizationBuilder()
-            .AddPolicy(Policies.CANPURGE, policy => policy.RequireRole(Roles.ADMINISTRATOR))
-            .AddPolicy(Policies.CANVIEW, policy => policy.RequireRole(Roles.ADMINISTRATOR))
-            .AddPolicy(Policies.CANADD, policy => policy.RequireRole(Roles.ADMINISTRATOR))
-            .AddPolicy(Policies.CANEDIT, policy => policy.RequireRole(Roles.ADMINISTRATOR))
-            .AddPolicy(Policies.CANDELETE, policy => policy.RequireRole(Roles.ADMINISTRATOR));
+        services.AddAuthorizationBuilder();
         return services;
     }
     private static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)

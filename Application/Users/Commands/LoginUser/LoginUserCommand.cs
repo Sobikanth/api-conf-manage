@@ -1,4 +1,3 @@
-using Application.Common.Models;
 using MediatR;
 
 namespace Application.Users.Commands.LoginUser;

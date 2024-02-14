@@ -4,16 +4,7 @@
 // Admin
 @Username=administrator@gmail.com
 @Password=Administrator@123
-@BearerToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljODdlYzcyLWMxMGMtNGQ1MS1iMDgyLTE2MWE0NTk3MDlmNCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbmlzdHJhdG9yQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOSVNUUkFUT1IiLCJleHAiOjE3MDc4NTIyMDksImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUxMzIiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MTMyIn0.F74YuFTIxzNZByP0RTAbyotySg_pCDfovJDBhQb31vY
-
-# @Username=Speaker@gmail.com
-# @Password=Speaker@123
-# @Email=Speaker@gmail.com
-# @FirstName=Speaker
-# @LastName=Speaker
-# @PhoneNumber=1234567890
-# @Gender=Female
-# @BearerToken=<Your Bearer Code>
+@BearerToken= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljODdlYzcyLWMxMGMtNGQ1MS1iMDgyLTE2MWE0NTk3MDlmNCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbmlzdHJhdG9yQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFETUlOSVNUUkFUT1IiLCJleHAiOjE3MDc4NTM4NDksImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUxMzIiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MTMyIn0.5aYzp9WN4FWouqNagttRJYFquRm_S1HP1eaVAMkGBcQ
 
 # POST Users Register
 POST {{Web_HostAddress}}/api/Users/Register
@@ -43,20 +34,23 @@ Content-Type: application/json
 
 ###
 
-# POST Users Refresh
-POST {{Web_HostAddress}}/api/Users/Refresh
-Authorization: Bearer {{BearerToken}}
-Content-Type: application/json
-
-{
-  "refreshToken": ""
-}
-
 ###
 
 # GET WeatherForecast
 GET {{Web_HostAddress}}/api/WeatherForecasts
 Authorization: Bearer {{BearerToken}}
+
+###
+
+# Create Rooms
+POST {{Web_HostAddress}}/api/Rooms
+Authorization: Bearer {{BearerToken}}
+Content-Type: application/json
+
+{
+  "capacity":75,
+  "available":"Yes"
+}
 
 ###
 
@@ -95,14 +89,9 @@ Content-Type: application/json
 
 ###
 
-# Create Rooms
-POST {{Web_HostAddress}}/api/Rooms
+###
+
+# Get Sessions
+GET  {{Web_HostAddress}}/api/Sessions
 Authorization: Bearer {{BearerToken}}
-Content-Type: application/json
-
-{
-  "capacity":75,
-  "available":"Yes"
-}
-
 ###
