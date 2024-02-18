@@ -1,4 +1,6 @@
+using Application.Common.Models;
 using Application.Sessions.Commands.CreateSession;
+using Application.Sessions.Commands.DeleteSession;
 using Application.Sessions.Queries;
 
 using webapi.Infrastructure;
@@ -12,12 +14,13 @@ public class Sessions : EndpointGroupBase
         app.MapGroup(this)
             .RequireAuthorization()
             .MapGet(GetSessions)
-            .MapPost(CreateSession);
+            .MapPost(CreateSession)
         // .MapPut(UpdateSession, "{id}")
-        // .MapPut(UpdateSessionDetail, "{UpdateDetail/{id}");
+        // .MapPut(UpdateSessionDetail, "{UpdateDetail/{id}")
+            .MapDelete(DeleteSession, "{id}");
     }
 
-    public async Task<SessionDto> GetSessions(ISender sender, CancellationToken cancellationToken)
+    public async Task<PaginatedList<SessionDto>> GetSessions(ISender sender, CancellationToken cancellationToken)
     {
         return await sender.Send(new GetSessionsQuery(), cancellationToken);
     }
@@ -25,5 +28,11 @@ public class Sessions : EndpointGroupBase
     public async Task<string> CreateSession(ISender sender, CreateSessionCommand command, CancellationToken cancellationToken)
     {
         return await sender.Send(command, cancellationToken);
+    }
+
+    public async Task<IResult> DeleteSession(ISender sender, Guid id)
+    {
+        await sender.Send(new DeleteSessionCommand(id));
+        return Results.NoContent();
     }
 }

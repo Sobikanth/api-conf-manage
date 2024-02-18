@@ -1,24 +1,10 @@
-﻿# For more info on HTTP files go to https://aka.ms/vs/httpfile
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
 @Web_HostAddress = https://localhost:5132
 
 // Admin
-@Username=Speaker@gmail.com
-@Password=Speaker@123
-@BearerToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNlYjgzNjVhLTkwYmItNDM4ZS1iZjkwLTdiYzAxYWI5YzhlZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiM2ViODM2NWEtOTBiYi00MzhlLWJmOTAtN2JjMDFhYjljOGVlIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU1BFQUtFUiIsImV4cCI6MTcwODIyNzk1MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTEzMiIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUxMzIifQ.7t3_CxCphvlJWnVyuMNBNoy4V9l-VPtzcyTVgO2LPcI
-
-# POST Users Register
-POST {{Web_HostAddress}}/api/Users/Register
-Content-Type: application/json
-
-{
-  "UserName": "Speaker@gmail.com",
-  "Password": "Speaker@123",
-  "Email": "Speaker@gmail.com",
-  "PhoneNumber": "123456789",
-  "FirstName": "Speaker",
-  "LastName": "Speaker",
-  "Gender": "Male"
-}
+@Username=administrator@gmail.com
+@Password=Administrator@123
+@BearerToken = <Your Bearer Token>
 
 ###
 
@@ -36,7 +22,13 @@ Content-Type: application/json
 
 ###
 
+# GET WeatherForecast
+GET {{Web_HostAddress}}/api/WeatherForecasts
+Authorization: Bearer {{BearerToken}}
 
+###
+
+###
 
 # Create Rooms
 POST {{Web_HostAddress}}/api/Rooms
@@ -50,9 +42,13 @@ Content-Type: application/json
 
 ###
 
+###
+
 # GET Rooms
 GET {{Web_HostAddress}}/api/Rooms
 Authorization: Bearer {{BearerToken}}
+
+###
 
 ###
 
@@ -66,6 +62,8 @@ Content-Type: application/json
   "University":"University of Washington",
   "JobTitle":"Software Engineer"
 }
+
+###
 
 ###
 
@@ -89,6 +87,15 @@ Content-Type: application/json
 
 # Get Sessions
 GET  {{Web_HostAddress}}/api/Sessions
+Authorization: Bearer {{BearerToken}}
+
+
+###
+
+###
+
+# Delete Sessions
+DELETE {{Web_HostAddress}}/api/Sessions/19fc9093-f93c-42d7-aabb-87e0b5977b0e
 Authorization: Bearer {{BearerToken}}
 
 
