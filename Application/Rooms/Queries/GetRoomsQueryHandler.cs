@@ -1,13 +1,12 @@
 using Application.Common.Interfaces;
+using Application.Common.Security;
 
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-
-using MediatR;
-
-using Microsoft.EntityFrameworkCore;
+using Domain.Constants;
 
 namespace Application.Rooms.Queries;
+
+[Authorize(Roles = Roles.ADMINISTRATOR)]
+[Authorize(Roles = Roles.SPEAKER)]
 
 public record GetRoomsQuery : IRequest<List<RoomDto>>;
 

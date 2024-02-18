@@ -1,6 +1,10 @@
-using MediatR;
+using Application.Common.Security;
+
+using Domain.Constants;
 
 namespace Application.Sessions.Commands.CreateSession;
+
+[Authorize(Roles = Roles.ADMINISTRATOR)]
 
 public record CreateSessionCommand : IRequest<string>
 {

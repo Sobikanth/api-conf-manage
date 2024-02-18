@@ -1,6 +1,10 @@
-using MediatR;
+using Application.Common.Security;
+
+using Domain.Constants;
 
 namespace Application.Speaker.Commands.CreateSpeaker;
+
+[Authorize(Roles = Roles.ADMINISTRATOR)]
 
 public class CreateSpeakerCommand : IRequest<string>
 {

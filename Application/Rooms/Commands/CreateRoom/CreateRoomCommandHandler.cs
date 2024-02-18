@@ -1,15 +1,9 @@
 using Application.Common.Interfaces;
-using Application.Common.Security;
 
-using Domain.Constants;
 using Domain.Entities;
-
-using MediatR;
 
 namespace Application.Rooms.Commands.CreateRoom;
 
-[Authorize(Roles = Roles.ADMINISTRATOR)]
-[Authorize(Policy = Policies.CANADD)]
 public class CreateRoomCommandHandler(IApplicationDbContext context) : IRequestHandler<CreateRoomCommand, Guid>
 {
 

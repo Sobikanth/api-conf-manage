@@ -1,12 +1,12 @@
 using Application.Common.Interfaces;
+using Application.Common.Security;
 
-using AutoMapper;
-
-using MediatR;
-
-using Microsoft.EntityFrameworkCore;
+using Domain.Constants;
 
 namespace Application.Sessions.Queries;
+
+[Authorize(Roles = Roles.ADMINISTRATOR)]
+[Authorize(Roles = Roles.SPEAKER)]
 
 public record GetSessionsQuery : IRequest<SessionDto>;
 

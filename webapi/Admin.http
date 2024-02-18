@@ -1,0 +1,93 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@Web_HostAddress = https://localhost:5132
+
+// Admin
+@Username=administrator@gmail.com
+@Password=Administrator@123
+@BearerToken =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjNlYjgzNjVhLTkwYmItNDM4ZS1iZjkwLTdiYzAxYWI5YzhlZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJTcGVha2VyQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlNQRUFLRVIiLCJleHAiOjE3MDgyMzEyNzEsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUxMzIiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MTMyIn0.OkenT_kpjgNvtEL6VGTIhGFKKxrGBgcC6eb7ebz6Vjw
+
+###
+
+# POST Users Login
+POST {{Web_HostAddress}}/api/Users/Login
+Content-Type: application/json
+
+{
+  "username": "{{Username}}",
+  "password": "{{Password}}",
+  "email": "{{Username}}"
+}
+
+###
+
+###
+
+# GET WeatherForecast
+GET {{Web_HostAddress}}/api/WeatherForecasts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjNlYjgzNjVhLTkwYmItNDM4ZS1iZjkwLTdiYzAxYWI5YzhlZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJTcGVha2VyQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlNQRUFLRVIiLCJleHAiOjE3MDgyMzE1ODAsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUxMzIiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MTMyIn0._AGuejzOrDOr3yFb9_kvNxgJKjGN6In-XtkW4VGUNN8
+
+###
+
+###
+
+# Create Rooms
+POST {{Web_HostAddress}}/api/Rooms
+Authorization: Bearer {{BearerToken}}
+Content-Type: application/json
+
+{
+  "capacity":75,
+  "available":"Yes"
+}
+
+###
+
+###
+
+# GET Rooms
+GET {{Web_HostAddress}}/api/Rooms
+Authorization: Bearer {{BearerToken}}
+
+###
+
+###
+
+# Create Speakers
+POST {{Web_HostAddress}}/api/Speaker
+Authorization: Bearer {{BearerToken}}
+Content-Type: application/json
+
+{
+  "Id":"3eb8365a-90bb-438e-bf90-7bc01ab9c8ee",
+  "University":"University of Washington",
+  "JobTitle":"Software Engineer"
+}
+
+###
+
+###
+
+# Create Sessions
+POST {{Web_HostAddress}}/api/Sessions
+Authorization: Bearer {{BearerToken}}
+Content-Type: application/json
+
+{
+  "Topic":"Nature",
+  "ConfDate":"2024-02-20",
+  "StartTime":"08:00:00",
+  "EndTime" : "17:00:00",
+  "SpeakerId":"3eb8365a-90bb-438e-bf90-7bc01ab9c8ee",
+  "RoomId" : "a1a5188b-16f0-49e8-9734-0978e3177727"
+}
+
+###
+
+###
+
+# Get Sessions
+GET  {{Web_HostAddress}}/api/Sessions
+Authorization: Bearer {{BearerToken}}
+
+
+###

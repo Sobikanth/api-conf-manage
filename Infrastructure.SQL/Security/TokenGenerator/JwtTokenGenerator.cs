@@ -1,7 +1,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+
 using Application.Common.Interfaces;
+
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -17,7 +19,7 @@ public class JwtTokenGenerator(IOptions<JwtSettings> jwtOptions) : IJwtTokenGene
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var claims = new List<Claim>
         {
-            new("id", userId.ToString(), userId.ToString()),
+            new(ClaimTypes.NameIdentifier, userId.ToString()),
             new(ClaimTypes.Name, userName)
         };
 

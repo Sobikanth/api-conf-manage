@@ -51,7 +51,7 @@ public static class DependencyInjection
     }
     private static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.Section));
+        services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SECTION));
 
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 

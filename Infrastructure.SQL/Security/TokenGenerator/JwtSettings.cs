@@ -2,7 +2,7 @@ namespace Infrastructure.SQL.Security.TokenGenerator;
 
 public class JwtSettings
 {
-    public const string Section = "JwtSettings";
+    public const string SECTION = "JwtSettings";
 
     public string Audience { get; set; } = null!;
     public string Issuer { get; set; } = null!;

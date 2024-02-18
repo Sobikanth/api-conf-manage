@@ -24,7 +24,7 @@ public class IdentityService(
 
             return user.UserName;
         }
-        catch (System.Exception)
+        catch (Exception)
         {
             return null;
         }
@@ -108,6 +108,6 @@ public class IdentityService(
     {
         var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
 
-        return user != null ? (await _userManager.GetRolesAsync(user)).ToList() : new List<string>();
+        return user != null ? [.. (await _userManager.GetRolesAsync(user))] : [];
     }
 }

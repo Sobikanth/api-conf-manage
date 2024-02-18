@@ -4,8 +4,6 @@ using Application.Common.Exceptions;
 using Application.Common.Interfaces;
 using Application.Common.Security;
 
-using MediatR;
-
 namespace Application.Common.Behaviors;
 
 public class AuthorizationBehaviour<TRequest, TResponse>(

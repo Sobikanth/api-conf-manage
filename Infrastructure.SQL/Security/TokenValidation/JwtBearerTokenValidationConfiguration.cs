@@ -1,5 +1,7 @@
 using System.Text;
+
 using Infrastructure.SQL.Security.TokenGenerator;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

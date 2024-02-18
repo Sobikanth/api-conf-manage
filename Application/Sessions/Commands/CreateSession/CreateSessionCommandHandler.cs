@@ -1,14 +1,10 @@
 using Application.Common.Interfaces;
-using Application.Common.Security;
 
-using Domain.Constants;
 using Domain.Entities;
 
-using MediatR;
 
 namespace Application.Sessions.Commands.CreateSession;
 
-[Authorize(Roles = Roles.ADMINISTRATOR)]
 public class CreateSessionCommandHandler(IApplicationDbContext context) : IRequestHandler<CreateSessionCommand, string>
 {
     private readonly IApplicationDbContext _context = context;
@@ -26,8 +22,7 @@ public class CreateSessionCommandHandler(IApplicationDbContext context) : IReque
             RoomEntity = _context.Rooms.Find(request.RoomId)
         };
 #pragma warning restore CS8601 // Possible null reference assignment.
-                              // entity.AddDomainEvent(new SessionCreatedEvent(entity));
-        _context.Sessions.Add(entity);
+        // entity.AddDomainEvent(new SessionCreatedEvent(entity));
         await _context.SaveChangesAsync(cancellationToken);
         return entity.Topic;
     }

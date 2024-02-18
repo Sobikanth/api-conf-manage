@@ -1,7 +1,5 @@
 using Application.Common.Interfaces;
 
-using MediatR;
-
 namespace Application.Users.Commands.LoginUser;
 
 public class LogInUserCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IIdentityService identityService) : IRequestHandler<LoginUserCommand, string>

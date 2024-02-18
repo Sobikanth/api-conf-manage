@@ -1,5 +1,3 @@
-using MediatR;
-
 namespace Application.Users.Commands.LoginUser;
 
 public record LoginUserCommand : IRequest<string>

@@ -1,7 +1,5 @@
 using Application.Common.Interfaces;
 
-using MediatR;
-
 namespace Application.Users.Commands.RegisterUser;
 
 public class RegisterUserCommandHandler(IIdentityService identityService) : IRequestHandler<RegisterUserCommand, Guid>

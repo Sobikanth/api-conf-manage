@@ -1,7 +1,5 @@
 using Application.Common.Interfaces;
 
-using FluentValidation;
-
 namespace Application.Sessions.Commands.CreateSession;
 
 public class CreateSessionCommandValidator : AbstractValidator<CreateSessionCommand>

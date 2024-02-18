@@ -1,14 +1,9 @@
 using Application.Common.Interfaces;
-using Application.Common.Security;
 
 using Domain.Constants;
 using Domain.Entities;
 
-using MediatR;
-
 namespace Application.Speaker.Commands.CreateSpeaker;
-
-[Authorize(Roles = Roles.ADMINISTRATOR)]
 
 public class CreateSpeakerCommandHandler(IApplicationDbContext context, IIdentityService identityService) : IRequestHandler<CreateSpeakerCommand, string>
 {
