@@ -8,7 +8,7 @@ public class CurrentUser(IHttpContextAccessor httpContextAccessor) : IUser
 {
     private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
-    public string Id
+    public string? Id
     {
         get
         {
