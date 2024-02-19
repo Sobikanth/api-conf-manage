@@ -1,3 +1,6 @@
 {
-  "cSpell.words": ["applicationdb", "confdb", "Touchpoints", "webapi"]
+  "cSpell.words": ["applicationdb", "confdb", "Touchpoints", "webapi"],
+  "json.schemas": [
+    
+  ]
 }

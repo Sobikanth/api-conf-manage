@@ -1,10 +1,10 @@
-using Application.Common.Security;
+// using Application.Common.Security;
 
-using Domain.Constants;
+// using Domain.Constants;
 
 namespace Application.WeatherForecasts.Queries.GetWeatherForecasts;
 
-[Authorize(Roles = Roles.ADMINISTRATOR)]
+// [Authorize(Roles = Roles.ADMINISTRATOR)]
 public record GetWeatherForecastsQuery : IRequest<IEnumerable<WeatherForecast>>;
 
 public class GetWeatherForecastsQueryHandler : IRequestHandler<GetWeatherForecastsQuery, IEnumerable<WeatherForecast>>
