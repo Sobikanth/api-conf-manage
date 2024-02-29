@@ -6,6 +6,25 @@
 @Password=Administrator@123
 @BearerToken = <Your Bearer Token>
 
+
+###
+
+# POST Users Register
+POST {{Web_HostAddress}}/api/Users/Register
+Content-Type: application/json
+
+{
+  "username": "HelloThere123",
+  "password": "HelloThere@123",
+  "phoneNumber": "1234567890",
+  "firstName": "Hello",
+  "lastName": "There",
+  "gender": "Male"
+}
+
+###
+
+
 ###
 
 # POST Users Login

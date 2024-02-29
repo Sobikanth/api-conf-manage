@@ -12,7 +12,7 @@ public interface IIdentityService
 
     Task<bool> AuthorizeAsync(string userId, string policyName);
 
-    Task<(Result Result, Guid UserId)> RegisterUserAsync(string userName, string password, string phoneNumber, string firstName, string lastName, string gender);
+    Task<Result> RegisterUserAsync(string userName, string password, string phoneNumber, string firstName, string lastName, string gender);
 
     // Task<(Result result, string token)> LoginUserAsync(string userName, string password);
 

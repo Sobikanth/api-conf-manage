@@ -1,3 +1,4 @@
+using Application.Common.Models;
 using Application.Users.Commands.LoginUser;
 using Application.Users.Commands.RegisterUser;
 
@@ -14,7 +15,7 @@ public class Users : EndpointGroupBase
             .MapPost(LoginUser, "login");
     }
 
-    public async Task<Guid> RegisterUser(ISender sender, RegisterUserCommand command, CancellationToken cancellationToken)
+    public async Task<Result> RegisterUser(ISender sender, RegisterUserCommand command, CancellationToken cancellationToken)
     {
         return await sender.Send(command, cancellationToken);
     }

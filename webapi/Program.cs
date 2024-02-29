@@ -11,6 +11,8 @@ builder.Services.AddWebServices();
 
 var app = builder.Build();
 
+app.UseCors("AllowAll");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

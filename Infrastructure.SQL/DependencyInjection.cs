@@ -20,6 +20,16 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructureSQLServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", builder =>
+                {
+                    builder
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin();
+                });
+        });
 
         services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {

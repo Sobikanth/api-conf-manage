@@ -30,7 +30,7 @@ public class IdentityService(
         }
     }
 
-    public async Task<(Result Result, Guid UserId)> RegisterUserAsync(string userName, string password, string phoneNumber, string firstName, string lastName, string gender)
+    public async Task<Result> RegisterUserAsync(string userName, string password, string phoneNumber, string firstName, string lastName, string gender)
     {
         var user = new ApplicationUser
         {
@@ -44,7 +44,7 @@ public class IdentityService(
 
         var result = await _userManager.CreateAsync(user, password);
 
-        return (result.ToApplicationResult(), new Guid(user.Id));
+        return result.ToApplicationResult();
     }
 
     public async Task<bool> IsInRoleAsync(string userId, string role)
