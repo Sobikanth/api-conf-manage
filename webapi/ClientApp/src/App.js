@@ -1,22 +1,25 @@
-import React, { Component } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import AppRoutes from './AppRoutes';
-import { Layout } from './components/Layout';
-import './custom.css';
+import { Box, Container, Divider, Stack } from "@mui/material";
+import Menu from "./components/Menu";
+import Content from "./components/Content";
+import NavBar from "./components/NavBar";
 
-export default class App extends Component {
-  static displayName = App.name;
-
-  render() {
-    return (
-      <Layout>
-        <Routes>
-          {AppRoutes.map((route, index) => {
-            const { element, ...rest } = route;
-            return <Route key={index} {...rest} element={element} />;
-          })}
-        </Routes>
-      </Layout>
-    );
-  }
+function App() {
+  return (
+    <Box>
+      <NavBar />
+      <Container maxWidth="xl">
+        <Stack
+          direction="row"
+          divider={<Divider orientation="vertical" flexItem />}
+          spacing={2}
+          justifyContent="space-between"
+        >
+          <Menu />
+          <Content />
+        </Stack>
+      </Container>
+    </Box>
+  );
 }
+
+export default App;
