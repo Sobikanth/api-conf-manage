@@ -1,5 +1,7 @@
+import { Login, Logout } from "@mui/icons-material";
 import { AppBar, Avatar, Toolbar, Typography, styled } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -7,6 +9,11 @@ const StyledToolbar = styled(Toolbar)({
 });
 
 const NavBar = () => {
+  const [isActive, setIsActive] = useState(false);
+
+  const handleLinkClick = () => {
+    setIsActive(true); // Update state when link is clicked
+  };
   return (
     <AppBar
       position="sticky"
@@ -17,8 +24,23 @@ const NavBar = () => {
     >
       <StyledToolbar>
         <Typography variant="h5">My App</Typography>
-        {/* <Avatar alt="Remy Sharp" src="https://i.pravatar.cc/300" /> */}
-        <button>Sign In</button>
+        <NavLink
+          to="/signin"
+          onClick={handleLinkClick}
+        >
+          {/* Conditional rendering of icons based on active state */}
+          {!isActive ? (
+            <Login
+              fontSize="large"
+              sx={{ color: (theme) => theme.palette.primary.contrastText }}
+            />
+          ) : (
+            <Logout
+              fontSize="large"
+              sx={{ color: (theme) => theme.palette.primary.contrastText }}
+            />
+          )}
+        </NavLink>
       </StyledToolbar>
     </AppBar>
   );

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Event, Home, Info, Person } from "@mui/icons-material";
+import { Event, Home, Info, Login, Person } from "@mui/icons-material";
 import {
   Box,
   List,
@@ -9,7 +9,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import React from "react";
-import About from "../About";
+import { NavLink } from "react-router-dom";
 
 const Menu = () => {
   const StyledListItem = styled(ListItem)({
@@ -17,6 +17,22 @@ const Menu = () => {
       backgroundColor: "#1565c0",
       color: "white",
     },
+  });
+
+  const StyledNavLink = styled(NavLink)({
+    textDecoration: "none",
+    color: "black",
+    fontSize: 20,
+    "&.active": {
+      background: "#1565c0",
+      color: "white",
+      padding: "0px 20px 0px 0px",
+      borderRadius: 5,
+    },
+  });
+
+  const StyledListItemIcon = styled(ListItemIcon)({
+    color: "primary",
   });
 
   return (
@@ -30,39 +46,47 @@ const Menu = () => {
       <Box position="fixed">
         <List>
           <StyledListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Home />
-              </ListItemIcon>
-              <ListItemText primary="Home" />
-            </ListItemButton>
+            <StyledNavLink to="/" style={{ textDecoration: "none" }}>
+              <ListItemButton>
+                <StyledListItemIcon>
+                  <Home />
+                </StyledListItemIcon>
+                <ListItemText primary="Home" />
+              </ListItemButton>
+            </StyledNavLink>
           </StyledListItem>
 
           <StyledListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Event />
-              </ListItemIcon>
-              <ListItemText primary="Event" />
-            </ListItemButton>
+            <StyledNavLink to="event" style={{ textDecoration: "none" }}>
+              <ListItemButton>
+                <StyledListItemIcon>
+                  <Event />
+                </StyledListItemIcon>
+                <ListItemText primary="Event" />
+              </ListItemButton>
+            </StyledNavLink>
           </StyledListItem>
 
           <StyledListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Person />
-              </ListItemIcon>
-              <ListItemText primary="Speakers" />
-            </ListItemButton>
+            <StyledNavLink to="speaker" style={{ textDecoration: "none" }}>
+              <ListItemButton>
+                <StyledListItemIcon>
+                  <Person />
+                </StyledListItemIcon>
+                <ListItemText primary="Speakers" />
+              </ListItemButton>
+            </StyledNavLink>
           </StyledListItem>
 
           <StyledListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Info />
-              </ListItemIcon>
-              <ListItemText primary="About Us" />
-            </ListItemButton>
+            <StyledNavLink to="about" style={{ textDecoration: "none" }}>
+              <ListItemButton>
+                <StyledListItemIcon>
+                  <Info />
+                </StyledListItemIcon>
+                <ListItemText primary="About" />
+              </ListItemButton>
+            </StyledNavLink>
           </StyledListItem>
         </List>
       </Box>

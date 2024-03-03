@@ -1,12 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
-const About = () => {
+const Speaker = () => {
   return (
     <Box flex={5}>
-      <Typography variant="h6">About</Typography>
+      <Typography variant="h6">Speaker</Typography>
     </Box>
   );
 };
 
-export default About;
+export default Speaker;

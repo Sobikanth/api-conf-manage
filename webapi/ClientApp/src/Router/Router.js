@@ -10,19 +10,18 @@ import Event from "../components/Pages/Event";
 import Home from "../components/Pages/Home";
 import SignIn from "../components/Auth/SignIn";
 import SignUp from "../components/Auth/SignUp";
+import Speaker from "../components/Pages/Speaker";
 
-const Router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    children: [
-      { path: "/", element: <Home /> },
-      { path: "/about", element: <About /> },
-      { path: "/event", element: <Event /> },
-      { path: "/signin", element: <SignIn /> },
-      { path: "/signup", element: <SignUp /> },
-    ],
-  },
-  { path: "*", element: <h1>Not Found</h1> },
-]);
+const Router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route element={<Root />}>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/event" element={<Event />} />
+      <Route path="/speaker" element={<Speaker />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp />} />
+    </Route>
+  )
+);
 export default Router;
