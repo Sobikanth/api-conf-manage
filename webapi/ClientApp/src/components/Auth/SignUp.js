@@ -26,7 +26,7 @@ import { myTheme } from "../../Theme";
 
 export default function SignUp() {
   const [isPending, setIsPending] = useState(false);
-  const history = useHistory();
+  // const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -58,7 +58,7 @@ export default function SignUp() {
       .then((data) => {
         if (data.succeeded) {
           console.log("Success:", data);
-          history.push("/signin");
+          // history.push("/signin");
         }
         console.log(data);
         setIsPending(false);

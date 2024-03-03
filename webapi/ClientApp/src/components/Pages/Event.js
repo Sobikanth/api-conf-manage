@@ -2,7 +2,7 @@ import React from "react";
 import EventCard from "./EventCard";
 import { Box, Grid } from "@mui/material";
 
-const Content = () => {
+const Event = () => {
   return (
     <Box flex={5} padding={3}>
       <Grid container spacing={2}>
@@ -29,4 +29,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default Event;

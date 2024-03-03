@@ -9,6 +9,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import React from "react";
+import About from "../About";
 
 const Menu = () => {
   const StyledListItem = styled(ListItem)({

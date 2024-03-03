@@ -9,7 +9,7 @@ const StyledToolbar = styled(Toolbar)({
 const NavBar = () => {
   return (
     <AppBar
-      position="sticky "
+      position="sticky"
       sx={{
         backgroundColor: (theme) => theme.palette.primary.main,
         color: (theme) => theme.palette.primary.contrastText,

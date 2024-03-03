@@ -1,7 +1,9 @@
 import { Box, Container, Divider, Stack } from "@mui/material";
-import Menu from "./components/Menu";
-import Content from "./components/Content";
-import NavBar from "./components/NavBar";
+import Menu from "./components/Pages/SideBar/Menu";
+import Event from "./components/Pages/Event";
+import NavBar from "./components/Pages/NavBar";
+import { RouterProvider } from "react-router-dom";
+import Router from "./Router/Router";
 
 function App() {
   return (
@@ -14,8 +16,7 @@ function App() {
           spacing={2}
           justifyContent="space-between"
         >
-          <Menu />
-          <Content />
+          <RouterProvider router={Router} />
         </Stack>
       </Container>
     </Box>
