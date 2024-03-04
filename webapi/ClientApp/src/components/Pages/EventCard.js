@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -10,8 +11,20 @@ import {
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import useFetch from "./useFetch";
+import styled from "@emotion/styled";
 
 const EventCard = (event) => {
+  const StyledNavLink = styled(NavLink)({
+    textDecoration: "none",
+    color: "white",
+    fontSize: 20,
+  });
+
+  const StyledBox = styled(Box)({
+    backgroundColor: "navy",
+    padding: "10px 20px 10px 20px",
+    borderRadius: 10,
+  });
   return (
     <Card sx={{ maxWidth: 600, marginBottom: "20px" }}>
       <CardHeader
@@ -40,8 +53,16 @@ const EventCard = (event) => {
           {event.description}
         </Typography>
       </CardContent>
-      <CardActions>
-        <NavLink to={`/event/${event.id}`}>Details</NavLink>
+      <CardActions
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          color: (theme) => theme.palette.primary.contrastText,
+        }}
+      >
+        <StyledBox>
+          <StyledNavLink to={`/event/${event.id}`}>Details</StyledNavLink>
+        </StyledBox>
       </CardActions>
     </Card>
   );
