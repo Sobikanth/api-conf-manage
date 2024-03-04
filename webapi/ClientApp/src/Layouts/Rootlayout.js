@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import NavBar from "../components/Pages/NavBar";
 import { Box, Container, Divider, Stack } from "@mui/material";
 
-const Root = () => {
+const Rootlayout = () => {
   return (
     <>
       <Box>
@@ -17,7 +17,9 @@ const Root = () => {
             justifyContent="space-between"
           >
             <Menu />
-            <Outlet />
+            <Box flex={5} padding={1}>
+              <Outlet />
+            </Box>
           </Stack>
         </Container>
       </Box>
@@ -25,4 +27,4 @@ const Root = () => {
   );
 };
 
-export default Root;
+export default Rootlayout;

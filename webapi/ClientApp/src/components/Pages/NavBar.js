@@ -25,7 +25,7 @@ const NavBar = () => {
       <StyledToolbar>
         <Typography variant="h5">My App</Typography>
         <NavLink
-          to="/signin"
+          to="signin"
           onClick={handleLinkClick}
         >
           {/* Conditional rendering of icons based on active state */}

@@ -1,18 +1,12 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import EventCard from "./EventCard";
 
-const EventCard = () => {
+const EventDetailsCard = () => {
   return (
-    <Card sx={{ maxWidth: 600, marginBottom: "20px" }}>
+    <Box>
+      <Card sx={{ maxWidth: 800 }}>
       <CardHeader
         title="Shrimp and Chorizo Paella"
         subheader="September 14, 2016"
@@ -36,10 +30,11 @@ const EventCard = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        <NavLink to="eventdetails">Details</NavLink>
+        <NavLink to="register">Register</NavLink>
       </CardActions>
     </Card>
+    </Box>
   );
 };
 
-export default EventCard;
+export default EventDetailsCard;
