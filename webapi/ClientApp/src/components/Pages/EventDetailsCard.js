@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Card,
@@ -9,10 +10,11 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import React from "react";
 import { NavLink, useParams } from "react-router-dom";
 import useFetch from "./useFetch";
 import styled from "@emotion/styled";
+import { checkAuthentication } from "../Auth/AuthUtils/checkAuthentication";
+import { getUserIdFromToken } from "../Auth/AuthUtils/getUserIdFromToken";
 
 const EventDetailsCard = () => {
   const StyledNavLink = styled(NavLink)({
@@ -28,7 +30,41 @@ const EventDetailsCard = () => {
   });
   const { id } = useParams();
   const { data: event } = useFetch("http://localhost:8000/event/" + id);
-  console.log(event);
+  const [isRegistered, setIsRegistered] = useState(false); // Track registration status
+
+  // Function to handle registration
+  const handleRegister = async () => {
+    // Check if user is authenticated (assuming you have a function to check authentication status)
+    const isAuthenticated = checkAuthentication();
+
+    if (isAuthenticated) {
+      // Get user ID from JWT token (assuming you have a function to retrieve user ID from the token)
+      const userId = getUserIdFromToken();
+
+      // Send POST request to register for the event
+      try {
+        const response = await fetch("http://localhost:8000/event/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({ userId, eventId: id }),
+        });
+
+        if (response.ok) {
+          setIsRegistered(true);
+          // Optionally, you can perform additional actions upon successful registration
+        } else {
+          throw new Error("Registration failed");
+        }
+      } catch (error) {
+        console.error("Error registering for event:", error);
+      }
+    } else {
+      // User is not authenticated, handle accordingly (e.g., redirect to login page)
+    }
+  };
 
   return (
     <>
@@ -46,20 +82,13 @@ const EventDetailsCard = () => {
                       color: (theme) => theme.palette.primary.contrastText,
                     }}
                   />
-                  <CardMedia
-                    sx={{ height: 500 }}
-                    image={event.image}
-                    // title="green iguana"
-                  />
+                  <CardMedia sx={{ height: 500 }} image={event.image} />
                   <CardContent
                     sx={{
                       height: 50,
                       overflow: "hidden",
                     }}
                   >
-                    {/* <Typography gutterBottom variant="h5" component="div">
-                      Lizard
-                    </Typography> */}
                     <Typography variant="body2" color="text.secondary">
                       {event.description}
                     </Typography>
@@ -71,11 +100,20 @@ const EventDetailsCard = () => {
                       color: (theme) => theme.palette.primary.contrastText,
                     }}
                   >
-                    <StyledBox>
-                      <StyledNavLink to={`/event/${event.id}`}>
-                        Register
-                      </StyledNavLink>
-                    </StyledBox>
+                    {!isRegistered ? ( // Render Register button if not registered
+                      <StyledBox>
+                        <StyledNavLink
+                          to={`/event/${event.id}/register`}
+                          onClick={handleRegister}
+                        >
+                          Register
+                        </StyledNavLink>
+                      </StyledBox>
+                    ) : (
+                      <Typography variant="body2" color="text.secondary">
+                        Registered
+                      </Typography>
+                    )}
                   </CardActions>
                 </Card>
               </Box>
@@ -109,6 +147,7 @@ const EventDetailsCard = () => {
               <Typography variant="body1">Room: {event.room}</Typography>
             </Paper>
           </Grid>
+          ;
         </Grid>
       )}
     </>
