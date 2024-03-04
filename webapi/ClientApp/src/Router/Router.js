@@ -21,7 +21,7 @@ const Router = createBrowserRouter(
       <Route path="about" element={<About />} />
       <Route path="event" element={<EventLayout />}>
         <Route index element={<AllEventCard />} />
-        <Route path="eventdetails" element={<EventDetailsCard />} />
+        <Route path=":id" element={<EventDetailsCard />} />
       </Route>
       <Route path="speaker" element={<Speaker />} />
       <Route path="signin" element={<SignIn />} />
