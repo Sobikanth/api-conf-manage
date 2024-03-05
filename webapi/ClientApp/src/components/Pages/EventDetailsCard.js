@@ -102,10 +102,7 @@ const EventDetailsCard = () => {
                   >
                     {!isRegistered ? ( // Render Register button if not registered
                       <StyledBox>
-                        <StyledNavLink
-                          to={`/event/${event.id}/register`}
-                          onClick={handleRegister}
-                        >
+                        <StyledNavLink to={`/event/${event.id}/register`}>
                           Register
                         </StyledNavLink>
                       </StyledBox>

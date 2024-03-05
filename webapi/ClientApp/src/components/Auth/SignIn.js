@@ -13,13 +13,19 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { myTheme } from "../../Theme";
+import { AuthContext } from "./AuthProvider";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 // const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const { signIn } = React.useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [isPending, setIsPending] = React.useState(false);
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -27,28 +33,24 @@ export default function SignIn() {
       username: data.get("email"),
       password: data.get("password"),
     };
+    // try {
+    //   await signIn(user);
+    //   setIsPending(false);
+    //   navigate(location?.state ? location.state : "/");
+    //   console.log("Successfully logged in!");
+    // } catch (error) {
+    //   console.error("Error:", error);
+    //   setIsPending(false);
+    // }
 
-    fetch("https://localhost:5132/api/Users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("Could not fetch the data for that resource");
-        }
-        return res.json();
+    await signIn(user)
+      .then(() => {
+        navigate(location?.state ? location.state : "/");
       })
-      .then((data) => {
-        localStorage.setItem("token", data.token);
-      })
-      .catch((err) => {
-        console.log("Error: ", err.message);
+      .catch((error) => {
+        console.error(error);
       });
   };
-
   return (
     <Box mt={2} flex={5}>
       <ThemeProvider theme={myTheme}>

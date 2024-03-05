@@ -17,18 +17,21 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation, useNavigate } from "react-router-dom";
 import { myTheme } from "../../Theme";
+import { AuthContext } from "./AuthProvider";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 // const defaultTheme = createTheme();
 
 export default function SignUp() {
+  const { createUser } = React.useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isPending, setIsPending] = useState(false);
-  // const history = useHistory();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -42,31 +45,14 @@ export default function SignUp() {
     };
 
     setIsPending(true);
-    fetch("https://localhost:5132/api/Users/Register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.succeeded) {
-          console.log("Success:", data);
-          // history.push("/signin");
-        }
-        console.log(data);
-        setIsPending(false);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        setIsPending(false);
-      });
+    try {
+      await createUser(user);
+      setIsPending(false);
+      navigate(location?.state ? location.state : "/signin");
+    } catch (error) {
+      console.error("Error:", error);
+      setIsPending(false);
+    }
   };
 
   const [gender, setGender] = React.useState("");
