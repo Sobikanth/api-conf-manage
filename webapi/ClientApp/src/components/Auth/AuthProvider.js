@@ -1,10 +1,19 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState(null);
+
+  // useEffect to store token in local storage whenever it changes
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("token", token);
+    } else {
+      localStorage.removeItem("token");
+    }
+  }, [token]);
 
   const createUser = async (user) => {
     setLoading(true);
@@ -45,8 +54,8 @@ const AuthProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      console.log("Data: ", data);
       localStorage.setItem("token", data.token);
+      setToken(data.token);
       setTimeout(() => {
         localStorage.removeItem("token");
       }, 3600000);
@@ -59,8 +68,13 @@ const AuthProvider = ({ children }) => {
       throw err; // Rethrow the error so that the caller can catch it
     }
   };
+
+  const logout = () => {
+    setToken(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, createUser, signIn }}>
+    <AuthContext.Provider value={{ createUser, signIn, logout, token }}>
       {children}
     </AuthContext.Provider>
   );

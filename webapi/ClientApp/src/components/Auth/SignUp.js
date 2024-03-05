@@ -55,7 +55,7 @@ export default function SignUp() {
     // }
     await createUser(user)
       .then(() => {
-        navigate(location?.state ? location.state : "/");
+        navigate(location?.state ? location.state : "/signin");
       })
       .catch((error) => {
         console.error(error);

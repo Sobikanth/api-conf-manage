@@ -7,22 +7,20 @@ import { Box, Container, Divider, Stack } from "@mui/material";
 const Rootlayout = () => {
   return (
     <>
-      <Box>
-        <NavBar />
-        <Container maxWidth="xl">
-          <Stack
-            direction="row"
-            divider={<Divider orientation="vertical" flexItem />}
-            spacing={2}
-            justifyContent="space-between"
-          >
-            <Menu />
-            <Box flex={5} padding={1}>
-              <Outlet />
-            </Box>
-          </Stack>
-        </Container>
-      </Box>
+      <NavBar />
+      <Container maxWidth="">
+        <Stack
+          direction="row"
+          divider={<Divider orientation="vertical" flexItem />}
+          spacing={2}
+          justifyContent="space-between"
+        >
+          <Menu />
+          <Box flex={5} padding={1}>
+            <Outlet />
+          </Box>
+        </Stack>
+      </Container>
     </>
   );
 };

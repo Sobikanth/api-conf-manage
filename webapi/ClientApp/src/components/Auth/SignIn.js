@@ -36,7 +36,8 @@ export default function SignIn() {
 
     await signIn(user)
       .then(() => {
-        navigate(location?.state ? location.state : "/");
+        console.log("Sign in successful");
+        navigate(location?.state?.from || "/");
       })
       .catch((error) => {
         console.error(error);
