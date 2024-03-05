@@ -33,15 +33,6 @@ export default function SignIn() {
       username: data.get("email"),
       password: data.get("password"),
     };
-    // try {
-    //   await signIn(user);
-    //   setIsPending(false);
-    //   navigate(location?.state ? location.state : "/");
-    //   console.log("Successfully logged in!");
-    // } catch (error) {
-    //   console.error("Error:", error);
-    //   setIsPending(false);
-    // }
 
     await signIn(user)
       .then(() => {

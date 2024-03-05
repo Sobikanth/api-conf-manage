@@ -14,12 +14,12 @@ POST {{Web_HostAddress}}/api/Users/Register
 Content-Type: application/json
 
 {
-  "username": "asdHelloThere123",
-  "password": "HelloThere@123",
-  "phoneNumber": "1234567890",
-  "firstName": "Hello",
-  "lastName": "There",
-  "gender": "Male"
+  "username": "",
+  "password": "",
+  "phoneNumber": "",
+  "firstName": "",
+  "lastName": "",
+  "gender": ""
 }
 
 ###

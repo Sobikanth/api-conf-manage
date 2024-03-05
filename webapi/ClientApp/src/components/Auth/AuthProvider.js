@@ -6,35 +6,24 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (user) => {
+  const createUser = async (user) => {
     setLoading(true);
-    return fetch("https://localhost:5132/api/Users/Register", {
+    const response = await fetch("https://localhost:5132/api/Users/Register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(user),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.succeeded) {
-          console.log("Success:", data);
-          // Assuming you want to set the user state after successful registration
-          setUser(user);
-        } else {
-          console.log("Failed:", data);
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        setLoading(false);
-      });
+    });
+    const data = await response.json();
+
+    if (data.succeeded) {
+      setLoading(false);
+      return data;
+    } else {
+      setLoading(false);
+      throw new Error(data.errors);
+    }
   };
 
   const signIn = async (user) => {
@@ -56,8 +45,8 @@ const AuthProvider = ({ children }) => {
       }
 
       const data = await response.json();
+      console.log("Data: ", data);
       localStorage.setItem("token", data.token);
-      // Delete token after 1 hour (3600000 milliseconds)
       setTimeout(() => {
         localStorage.removeItem("token");
       }, 3600000);

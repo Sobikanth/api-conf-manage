@@ -44,15 +44,22 @@ export default function SignUp() {
       gender: data.get("gender"),
     };
 
-    setIsPending(true);
-    try {
-      await createUser(user);
-      setIsPending(false);
-      navigate(location?.state ? location.state : "/signin");
-    } catch (error) {
-      console.error("Error:", error);
-      setIsPending(false);
-    }
+    // setIsPending(true);
+    // try {
+    //   await createUser(user);
+    //   setIsPending(false);
+    //   navigate(location?.state ? location.state : "/signin");
+    // } catch (error) {
+    //   console.error("Error:", error);
+    //   setIsPending(false);
+    // }
+    await createUser(user)
+      .then(() => {
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const [gender, setGender] = React.useState("");
