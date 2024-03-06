@@ -54,6 +54,31 @@ public class IdentityService(
         return user != null && await _userManager.IsInRoleAsync(user, role);
     }
 
+    public async Task<List<string>> GetUserAsync(string userId)
+    {
+        var user = await _userManager.Users.SingleOrDefaultAsync(u => u.Id == userId);
+
+        if (user == null)
+        {
+            return [];
+        }
+        else
+        {
+            var userInfo = new List<string>();
+
+            if (user != null)
+            {
+                userInfo.Add(user.UserName ?? string.Empty);
+                userInfo.Add(user.PhoneNumber ?? string.Empty);
+                userInfo.Add(user.FirstName ?? string.Empty);
+                userInfo.Add(user.LastName ?? string.Empty);
+                userInfo.Add(user.Gender ?? string.Empty);
+            }
+
+            return userInfo;
+        }
+    }
+
     public async Task<bool> AddToRoleAsync(string userId, string role)
     {
         var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);

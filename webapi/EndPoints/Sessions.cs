@@ -20,7 +20,7 @@ public class Sessions : EndpointGroupBase
             .MapDelete(DeleteSession, "{id}");
     }
 
-    public async Task<PaginatedList<SessionDto>> GetSessions(ISender sender, CancellationToken cancellationToken)
+    public async Task<PaginatedList<SessionVmDto>> GetSessions(ISender sender, CancellationToken cancellationToken)
     {
         return await sender.Send(new GetSessionsQuery(), cancellationToken);
     }

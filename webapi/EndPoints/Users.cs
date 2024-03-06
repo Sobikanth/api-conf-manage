@@ -20,7 +20,7 @@ public class Users : EndpointGroupBase
         return await sender.Send(command, cancellationToken);
     }
 
-    public async Task<JwtTokenResponse> LoginUser(ISender sender, LoginUserCommand command, CancellationToken cancellationToken)
+    public async Task<List<object>> LoginUser(ISender sender, LoginUserCommand command, CancellationToken cancellationToken)
     {
         return await sender.Send(command, cancellationToken);
     }
