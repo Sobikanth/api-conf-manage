@@ -23,10 +23,10 @@ public class PaginatedList<T>(IReadOnlyCollection<T> items, int count, int pageN
         }
     }
 
-    public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize)
+    public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
     {
-        var count = await source.CountAsync();
-        var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+        var count = await source.CountAsync(cancellationToken);
+        var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
 
         return new PaginatedList<T>(items, count, pageNumber, pageSize);
     }

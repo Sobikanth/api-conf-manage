@@ -16,6 +16,8 @@ const Menu = () => {
     "&:hover": {
       backgroundColor: "#1565c0",
       color: "white",
+      elevation: 40,
+      boxShadow: "0 0 10px 0px #1565c0",
     },
   });
 
@@ -40,8 +42,9 @@ const Menu = () => {
       mt={2}
       flex={1}
       sx={{
-        display: { xs: "none", md: "block" },
+        display: { xs: "none", md: "none", lg: "block", xl: "block" },
       }}
+      ml={4}
     >
       <Box position="fixed">
         <List>

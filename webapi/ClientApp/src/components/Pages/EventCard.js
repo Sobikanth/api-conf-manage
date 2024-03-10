@@ -25,8 +25,17 @@ const EventCard = (event) => {
     padding: "10px 20px 10px 20px",
     borderRadius: 10,
   });
+
+  const StyledCard = styled(Card)({
+    maxWidth: 400,
+    margin: "auto",
+    "&:hover": {
+      boxShadow: "0 0 10px 0px #1565c0",
+      elevation: 40,
+    },
+  });
   return (
-    <Card sx={{ maxWidth: 600, marginBottom: "20px" }}>
+    <StyledCard>
       <CardHeader
         title={event.title}
         subheader={event.date}
@@ -64,7 +73,7 @@ const EventCard = (event) => {
           <StyledNavLink to={`/event/${event.id}`}>Details</StyledNavLink>
         </StyledBox>
       </CardActions>
-    </Card>
+    </StyledCard>
   );
 };
 

@@ -8,17 +8,15 @@ const Rootlayout = () => {
   return (
     <>
       <NavBar />
-      <Container maxWidth="">
+      <Menu />
+      <Container maxWidth="lg">
         <Stack
           direction="row"
           divider={<Divider orientation="vertical" flexItem />}
           spacing={2}
           justifyContent="space-between"
         >
-          <Menu />
-          <Box flex={5} padding={1}>
-            <Outlet />
-          </Box>
+          <Outlet />
         </Stack>
       </Container>
     </>
