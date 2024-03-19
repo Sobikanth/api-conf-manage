@@ -15,8 +15,6 @@ public class Sessions : EndpointGroupBase
             .RequireAuthorization()
             .MapGet(GetSessions)
             .MapPost(CreateSession)
-        // .MapPut(UpdateSession, "{id}")
-        // .MapPut(UpdateSessionDetail, "{UpdateDetail/{id}")
             .MapDelete(DeleteSession, "{id}");
     }
 

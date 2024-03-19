@@ -15,8 +15,6 @@ public class Rooms : EndpointGroupBase
             .RequireAuthorization()
             .MapGet(GetRooms)
             .MapPost(CreateRoom);
-        // .MapPut(UpdateRoom, "{id}")
-        // .MapPut(UpdateRoomDetail, "{UpdateDetail/{id}");
     }
 
     public async Task<List<RoomDto>> GetRooms(ISender sender, CancellationToken cancellationToken)

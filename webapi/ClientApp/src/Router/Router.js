@@ -26,9 +26,9 @@ const Router = createBrowserRouter(
       <Route
         path="event"
         element={
-
+          <PrivateRoute>
             <EventLayout />
-
+          </PrivateRoute>
         }
       >
         <Route index element={<AllEventCard />} />

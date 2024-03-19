@@ -7,9 +7,8 @@ const PrivateRoute = ({ children }) => {
   const location = useLocation();
   if (token) {
     return children;
-  } else {
-    return <Navigate to="/signin" state={{ from: location }} />;
   }
+  return <Navigate state={location.pathname} to="/signin" />;
 };
 
 export default PrivateRoute;

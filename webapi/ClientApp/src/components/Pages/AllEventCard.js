@@ -13,7 +13,7 @@ import useFetch from "./useFetch";
 const MAX_TITLE_LENGTH = 10;
 const MAX_DESCRIPTION_LENGTH = 100;
 
-const AllEventCard = ({ title }) => { // Receive title as a prop
+const AllEventCard = ({ title }) => {
   const {
     data: events,
     error,

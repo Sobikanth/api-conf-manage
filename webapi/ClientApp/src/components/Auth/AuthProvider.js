@@ -54,8 +54,8 @@ const AuthProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      localStorage.setItem("token", data.token);
-      setToken(data.token);
+            localStorage.setItem("token", data.token);
+            setToken(data.token);
       setTimeout(() => {
         localStorage.removeItem("token");
       }, 3600000);
