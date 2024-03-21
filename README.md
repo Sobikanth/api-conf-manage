@@ -1,7 +1,7 @@
 # api-conf-manage
 
 Hosts the backend components for conference management system.
-Front end is in Development using ReactJS
+Front end is in Development using ReactJS (branch add-feature-clientApp)
 
 ## User Stories
 
