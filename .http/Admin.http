@@ -86,8 +86,8 @@ Content-Type: application/json
 ###
 
 # Get Sessions
-GET  {{Web_HostAddress}}/api/Sessions
-Authorization: Bearer {{BearerToken}}
+GET  {{Web_HostAddress}}/api/Session
+Authorization: Bearer {{BearerToken}} abc
 
 
 ###
